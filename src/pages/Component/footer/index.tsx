@@ -1,0 +1,56 @@
+import React from 'react';
+import { FacebookOutlined, InstagramOutlined } from '@ant-design/icons';
+import './index.less';
+
+const AppFooter: React.FC = () => {
+  return (
+    <footer className="modern-footer">
+      <div className="modern-footer-container">
+        <div className="footer-column brand-column">
+          <div className="brand-logo">
+            <img src="/logo.webp" alt="Logo Căn tin Hiện đại" className="logo-img" />
+          </div>
+          <p className="brand-description">
+            Trải nghiệm ẩm thực tuyệt vời<br />trong không gian hiện đại.
+          </p>
+        </div>
+
+        <div className="footer-column links-column">
+          <h4 className="footer-heading">Liên kết</h4>
+          <ul className="footer-links">
+            <li><a href="#">Chính sách bảo mật</a></li>
+            <li><a href="#">Điều khoản dịch vụ</a></li>
+            <li><a href="#">Liên hệ</a></li>
+            <li><a href="#">Tuyển dụng</a></li>
+          </ul>
+        </div>
+
+        <div className="footer-column contact-column">
+          <h4 className="footer-heading">Liên hệ</h4>
+          <ul className="footer-contact-info">
+            <li>123 Đại lộ Hiện đại, Quận Ẩm thực</li>
+            <li><a href="mailto:contact@cantinhiendai.com">contact@cantinhiendai.com</a></li>
+            <li><a href="tel:+84123456789">+84 123 456 789</a></li>
+          </ul>
+        </div>
+
+        <div className="footer-column social-column">
+          <h4 className="footer-heading">Theo dõi chúng tôi</h4>
+          <div className="social-container">
+            <a href="#" className="social-btn facebook">
+              <FacebookOutlined className="icon" />
+              <span className="text">Facebook</span>
+            </a>
+
+            <a href="#" className="social-btn instagram">
+              <InstagramOutlined className="icon" />
+              <span className="text">Instagram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default AppFooter;
