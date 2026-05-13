@@ -1,0 +1,35 @@
+.main-page-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+
+  .content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    .content-body {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      .placeholder-card {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e9ecef;
+        text-align: center;
+
+        h3 {
+          margin-top: 0;
+          color: #2D6A4F;
+        }
+        
+        p {
+          color: #6c757d;
+        }
+      }
+    }
+  }
+}

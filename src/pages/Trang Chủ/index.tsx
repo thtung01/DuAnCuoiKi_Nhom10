@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Topbar from '../Component/topbar/topbar';
+import Topbar from './Component/topbar/topbar';
 import Banner from './Banner/banner';
 import FoodSlider from './Hero Section';
 import ContentSection from './Content';
-import Footer from '../Component/footer';
+import Footer from './Component/footer';
 import './index.less';
 
 const HomePage: React.FC = () => {
