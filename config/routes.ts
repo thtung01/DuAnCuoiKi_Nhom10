@@ -16,7 +16,7 @@ export default [
   },
   {
     path: '/trang-chinh',
-    component: './Khách Hàng/trang chính',
+    component: './Khách Hàng/Trang chính',
     layout: false,
   },
 ];
