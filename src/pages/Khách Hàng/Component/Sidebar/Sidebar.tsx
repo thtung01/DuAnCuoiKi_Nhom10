@@ -12,7 +12,7 @@ import { useModel } from 'umi';
 const Sidebar: React.FC = () => {
   const { page, setPage } = useModel('Khách Hàng.global');
   const { role, setRole, currentUser } = useModel('Khách Hàng.user');
-  const { cart } = useModel('Khách Hàng.Thực đơn.index');
+  const { cart, setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
 
   const user = currentUser || defaultUser;
 
@@ -43,7 +43,13 @@ const Sidebar: React.FC = () => {
             <button
               key={item.id}
               className={`nav-item ${page === item.id ? 'active' : ''}`}
-              onClick={() => setPage(item.id)}
+              onClick={() => {
+                if (item.id === 'cart') {
+                  setCartOpen(true);
+                } else {
+                  setPage(item.id);
+                }
+              }}
             >
               <Icon style={{ fontSize: '18px' }} />
               {item.label}
