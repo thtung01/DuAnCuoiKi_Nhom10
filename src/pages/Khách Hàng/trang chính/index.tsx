@@ -3,9 +3,8 @@ import { useModel } from 'umi';
 import Sidebar from '../Component/Sidebar/Sidebar';
 import Topbar from '../Component/topbar';
 import EmployeeMenu from '../Thucdon';
-import HistoryPage from '../History';
-import VoucherPage from '../Voucher';
-import ProfilePage from '../Profile';
+import HistoryPage from '../Đơn Hàng';
+import GioHang from '../Giỏ Hàng';
 import './index.less';
 
 const MainPage: React.FC = () => {
@@ -18,10 +17,6 @@ const MainPage: React.FC = () => {
         return <EmployeeMenu onOpenCart={() => setCartOpen(true)} ordersToday={12} />;
       case 'history':
         return <HistoryPage />;
-      case 'vouchers':
-        return <VoucherPage />;
-      case 'profile':
-        return <ProfilePage />;
       default:
         return null;
     }
@@ -36,6 +31,9 @@ const MainPage: React.FC = () => {
           {renderContent()}
         </section>
       </main>
+
+      {/* Giỏ hàng — drawer trượt từ phải, tự quản lý qua cartOpen */}
+      <GioHang />
     </div>
   );
 };

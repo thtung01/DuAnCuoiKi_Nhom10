@@ -1,0 +1,289 @@
+.history-page-container {
+  width: 100%;
+  margin: 0;
+
+  .page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 4px;
+      color: var(--ink);
+    }
+
+    .page-subtitle {
+      color: var(--ink-3);
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+
+  .seg-radio {
+    display: inline-flex;
+    background: #f1f3f5;
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+
+    button {
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #adb5bd;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &.active {
+        background: white;
+        color: #212529;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      }
+    }
+  }
+
+  .orders-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .order-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    }
+
+    .card-main {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      padding: 24px;
+      gap: 24px;
+      align-items: flex-start;
+      border-bottom: 1px solid #f1f3f5;
+    }
+
+    .order-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+
+      .order-id {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        color: #adb5bd;
+      }
+
+      .pickup-time {
+        font-size: 12px;
+        color: #868e96;
+        strong { color: #212529; }
+      }
+    }
+
+    .order-items {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+
+      .item-preview {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #495057;
+
+        .emoji { font-size: 20px; }
+        .qty { color: #adb5bd; font-family: monospace; }
+      }
+    }
+
+    .card-side {
+      text-align: right;
+      
+      .total-label {
+        font-size: 11px;
+        color: #adb5bd;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 4px;
+      }
+
+      .total-value {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 24px;
+        font-weight: 700;
+        color: #212529;
+        
+        .unit { font-size: 14px; font-weight: 500; color: #adb5bd; margin-left: 2px; }
+      }
+
+      .payment-method {
+        font-size: 12px;
+        color: #868e96;
+        margin-top: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+    }
+
+    .order-note {
+      padding: 12px 24px;
+      font-size: 13px;
+      color: #868e96;
+      background: #f8f9fa;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .card-actions {
+      padding: 16px 24px;
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      background: #ffffff;
+    }
+  }
+
+  // Tracker Styles
+  .tracker {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    position: relative;
+    padding: 12px 0;
+  }
+
+  .tracker-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: #e9ecef;
+      z-index: 0;
+    }
+
+    &:last-child::before { display: none; }
+
+    &.done::before { background: #40c057; }
+
+    .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      display: grid;
+      place-items: center;
+      position: relative;
+      z-index: 1;
+      font-size: 14px;
+      color: #adb5bd;
+      transition: all 0.3s;
+    }
+
+    &.done .dot {
+      background: #40c057;
+      border-color: #40c057;
+      color: white;
+    }
+
+    &.active .dot {
+      background: white;
+      border-color: #40c057;
+      color: #40c057;
+      box-shadow: 0 0 0 4px #ebfbee;
+    }
+
+    .label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #adb5bd;
+      text-align: center;
+    }
+
+    &.done .label, &.active .label {
+      color: #212529;
+    }
+  }
+
+  // Chips
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #f1f3f5;
+    color: #495057;
+
+    &.green { background: #ebfbee; color: #2b8a3e; }
+    &.warn { background: #fff9db; color: #e67700; }
+    &.err { background: #fff5f5; color: #c92a2a; }
+    &.info { background: #e7f5ff; color: #1864ab; }
+
+    .dot-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #adb5bd;
+      
+      &.green { background: #40c057; box-shadow: 0 0 0 3px #ebfbee; }
+      &.warn { background: #fab005; box-shadow: 0 0 0 3px #fff9db; }
+      &.err { background: #fa5252; box-shadow: 0 0 0 3px #fff5f5; }
+      &.info { background: #228be6; box-shadow: 0 0 0 3px #e7f5ff; }
+    }
+  }
+
+  // Empty state
+  .empty-state {
+    padding: 80px 24px;
+    text-align: center;
+    background: white;
+    border-radius: 24px;
+    border: 1px dashed #dee2e6;
+
+    .icon-wrapper {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #f8f9fa;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+      color: #adb5bd;
+    }
+
+    h3 { margin-bottom: 8px; color: #212529; }
+    p { color: #868e96; }
+  }
+}

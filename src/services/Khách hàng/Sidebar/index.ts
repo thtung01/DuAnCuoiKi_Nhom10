@@ -8,8 +8,7 @@ import {
 export const NAV_EMPLOYEE = [
   { id: 'menu', label: 'Thực đơn', icon: CoffeeOutlined },
   { id: 'cart', label: 'Giỏ của tôi', icon: ShoppingCartOutlined },
-  { id: 'orders', label: 'Đơn của tôi', icon: FileTextOutlined },
-  { id: 'wallet', label: 'Ví & lịch sử', icon: WalletOutlined },
+  { id: 'history', label: 'Đơn của tôi', icon: FileTextOutlined },
 ];
 
 export const defaultUser = {
