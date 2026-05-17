@@ -1,5 +1,6 @@
 import React from 'react';
 import { useModel } from 'umi';
+import { history } from 'umi';
 import {
   HomeOutlined,
   ContainerOutlined,
@@ -11,7 +12,7 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 import { AdminPage } from '@/services/Quản trị/typing';
-import { SEED_USERS } from '@/services/Quản trị/Người dùng';
+import { logout, getUser } from '@/services/auth';
 
 interface NavItem {
   id: AdminPage;
@@ -35,12 +36,21 @@ const AdminSidebar: React.FC = () => {
 
   const pendingCount = orders.filter(o => o.status === 'pending').length;
   const lowStockCount = inventory.filter(i => i.stock < i.threshold).length;
-  const adminUser = SEED_USERS.find(u => u.role === 'admin') ?? SEED_USERS[0];
+
+  const authUser = getUser();
+  const displayUser = authUser
+    ? { avatar: authUser.avatar, name: authUser.name, dept: authUser.dept }
+    : { avatar: 'LN', name: 'Lê Hoàng Nam', dept: 'Quản trị' };
 
   const getBadge = (id: AdminPage): number => {
     if (id === 'kitchen') return pendingCount;
     if (id === 'inventory') return lowStockCount;
     return 0;
+  };
+
+  const handleLogout = () => {
+    logout();
+    history.push('/');
   };
 
   return (
@@ -80,12 +90,17 @@ const AdminSidebar: React.FC = () => {
       </nav>
 
       <div className="user-pill">
-        <div className="avatar">{adminUser.avatar}</div>
+        <div className="avatar">{displayUser.avatar}</div>
         <div className="meta">
-          <span className="name">{adminUser.name}</span>
-          <span className="role">{adminUser.dept}</span>
+          <span className="name">{displayUser.name}</span>
+          <span className="role">{displayUser.dept}</span>
         </div>
-        <button className="icon-btn" style={{ width: 28, height: 28 }}>
+        <button
+          className="icon-btn"
+          style={{ width: 28, height: 28 }}
+          title="Đăng xuất"
+          onClick={handleLogout}
+        >
           <LogoutOutlined style={{ fontSize: 14 }} />
         </button>
       </div>

@@ -8,6 +8,8 @@ import {
 import './Sidebar.less';
 import { NAV_EMPLOYEE, defaultUser } from '@/services/Khách hàng/Sidebar';
 import { useModel } from 'umi';
+import { history } from 'umi';
+import { logout } from '@/services/auth';
 
 const Sidebar: React.FC = () => {
   const { page, setPage } = useModel('Khách Hàng.global');
@@ -15,6 +17,11 @@ const Sidebar: React.FC = () => {
   const { cart, setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
 
   const user = currentUser || defaultUser;
+
+  const handleLogout = () => {
+    logout();
+    history.push('/');
+  };
 
   return (
     <aside className="sidebar">
@@ -75,7 +82,7 @@ const Sidebar: React.FC = () => {
           <span className="name">{user.name}</span>
           <span className="role">{user.dept}</span>
         </div>
-        <button className="icon-btn logout-btn">
+        <button className="icon-btn logout-btn" title="Đăng xuất" onClick={handleLogout}>
           <LogoutOutlined style={{ fontSize: '16px' }} />
         </button>
       </div>

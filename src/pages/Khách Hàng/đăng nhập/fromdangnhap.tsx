@@ -2,39 +2,51 @@ import React, { useState } from 'react';
 import { GoogleOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import { history } from 'umi';
+import { login } from '@/services/auth';
 
 const LoginForm: React.FC = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Tài khoản giả định để test
-    const DUMMY_PHONE = '0987654321';
-    const DUMMY_PASSWORD = 'password123';
-
-    if (phone === DUMMY_PHONE && password === DUMMY_PASSWORD) {
-      message.success('Đăng nhập thành công! Chào mừng bạn.');
-      history.push('/trang-chinh'); // Chuyển hướng về trang chính
-    } else {
-      message.error('Số điện thoại hoặc mật khẩu không chính xác. Thử: 0987654321 / password123');
+    const user = login(phone, password);
+    if (!user) {
+      message.error('Số điện thoại hoặc mật khẩu không chính xác.');
+      return;
     }
+    message.success(`Chào mừng ${user.name}!`);
+    if (user.role === 'admin') {
+      history.push('/quan-tri');
+    } else {
+      history.push('/trang-chinh');
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') handleLogin();
   };
 
   return (
     <form action="#" onSubmit={(e) => e.preventDefault()}>
       <h1>Đăng nhập</h1>
-      <input 
-        type="text" 
-        placeholder="Số điện thoại (Test: 0987654321)" 
+      <input
+        type="text"
+        placeholder="Số điện thoại"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
-      <input 
-        type="password" 
-        placeholder="Mật khẩu (Test: password123)" 
+      <input
+        type="password"
+        placeholder="Mật khẩu"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
+      <div style={{ fontSize: 11, color: '#888', marginBottom: 4 }}>
+        Nhân viên: <b>0987654321</b> / <b>password123</b>&nbsp;&nbsp;
+        Admin: <b>0000000001</b> / <b>admin123</b>
+      </div>
       <a href="#" className="forgot-password">Quên mật khẩu?</a>
       <button className="submit-btn" type="button" onClick={handleLogin}>Đăng nhập</button>
       <div className="social-login">
