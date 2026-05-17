@@ -8,10 +8,11 @@ import ThucDonAdmin from '../Thực đơn';
 import KhoNguyenLieu from '../Kho nguyên liệu';
 import NguoiDung from '../Người dùng';
 import BaoCao from '../Báo cáo';
+import './admin.less';
 import './index.less';
 
 const AdminPage: React.FC = () => {
-  const { page } = useModel('Quản trị.global');
+  const { page, theme } = useModel('Quản trị.global');
 
   const renderContent = () => {
     switch (page) {
@@ -26,7 +27,7 @@ const AdminPage: React.FC = () => {
   };
 
   return (
-    <div className="admin-shell">
+    <div className="admin-shell" data-theme={theme}>
       <AdminSidebar />
       <main className="admin-main">
         <AdminTopbar />
