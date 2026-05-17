@@ -1,0 +1,89 @@
+.tong-quan-page { }
+
+.top-mon-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.top-mon-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rank-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--bg-soft);
+  color: var(--ink-2);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+.rank-badge.rank-first {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.top-mon-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.top-mon-name {
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-mon-bar {
+  height: 3px;
+  background: var(--bg-soft);
+  border-radius: 999px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.top-mon-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+}
+
+.don-dang-xu-ly {
+  display: flex;
+  flex-direction: column;
+}
+
+.don-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.canh-bao-kho {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.canh-bao-kho-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
