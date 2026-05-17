@@ -4,11 +4,12 @@ import {
     MinusOutlined,
     ClockCircleOutlined,
     ThunderboltOutlined,
+    StarFilled,
 } from '@ant-design/icons';
 import { DishCardProps } from '@/services/Khách hàng/Thực đơn/component/themonan';
 
-const DishCard: React.FC<DishCardProps> = ({ dish, qty, onAdd, onInc, onDec }) => (
-    <div className="dish-card">
+const DishCard: React.FC<DishCardProps> = ({ dish, qty, onAdd, onInc, onDec, onClick }) => (
+    <div className="dish-card" onClick={onClick} style={{ cursor: 'pointer' }}>
         <div className="dish-image">
             <div className="placeholder">
                 <span className="ph-emoji">{dish.emoji}</span>
@@ -25,19 +26,18 @@ const DishCard: React.FC<DishCardProps> = ({ dish, qty, onAdd, onInc, onDec }) =
             <div className="dish-meta">
                 <span><ClockCircleOutlined /> {dish.prep}m</span>
                 <span><ThunderboltOutlined /> {dish.kcal} kcal</span>
+                <span className="dish-rating"><StarFilled /> {dish.rating.toFixed(1)}</span>
             </div>
             <div className="dish-foot">
                 <div className="dish-price">
                     {dish.price.toLocaleString()} <span className="currency">đ</span>
                 </div>
                 {qty === 0 ? (
-
-                    <button className="dish-add" onClick={onAdd}>
+                    <button className="dish-add" onClick={(e) => { e.stopPropagation(); onAdd(); }}>
                         <PlusOutlined />
                     </button>
                 ) : (
-
-                    <div className="dish-qty">
+                    <div className="dish-qty" onClick={(e) => e.stopPropagation()}>
                         <button onClick={onDec}><MinusOutlined /></button>
                         <span>{qty}</span>
                         <button onClick={onInc}><PlusOutlined /></button>
@@ -49,3 +49,4 @@ const DishCard: React.FC<DishCardProps> = ({ dish, qty, onAdd, onInc, onDec }) =
 );
 
 export default DishCard;
+

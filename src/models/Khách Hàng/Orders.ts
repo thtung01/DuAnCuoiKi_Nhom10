@@ -16,6 +16,22 @@ const SEED_ORDERS: Order[] = [
         created: '12:00',
         pickup: '12:15',
         note: 'Không hành'
+    },
+    {
+        id: 'BU-9999',
+        user: 'u1',
+        userName: 'Nguyễn Minh Anh',
+        dept: 'Engineering',
+        items: [
+            { id: 'm1', name: 'Cơm tấm sườn bì chả', qty: 1, price: 45000 },
+            { id: 'm5', name: 'Trà đá', qty: 1, price: 5000 }
+        ],
+        total: 50000,
+        status: 'done',
+        payment: 'qr',
+        created: '10:30',
+        pickup: '11:00',
+        note: 'Giao nhanh giúp em'
     }
 ];
 
@@ -29,7 +45,7 @@ export default function useOrderModel() {
     const advanceOrder = useCallback((orderId: string) => {
         setOrders(prev => prev.map(o => {
             if (o.id !== orderId) return o;
-            
+
             const nextStatus: Record<string, OrderStatus> = {
                 pending: 'preparing',
                 preparing: 'ready',

@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
 import { useModel } from 'umi';
-import { Button, Space, Typography } from 'antd';
+import { Button, Space } from 'antd';
 import { 
     FileTextOutlined, 
     InfoCircleOutlined, 
     CheckOutlined, 
-    PrinterOutlined, 
     ReloadOutlined 
 } from '@ant-design/icons';
 import { ORDER_STATUSES, PAYMENT_METHODS } from '@/services/Khách hàng/Orders/typing';
 import { SEED_MENU } from '@/services/Khách hàng/Thực đơn';
 import OrderTracker from './component/OrderTracker';
+import RatingPage from '../Đánh Giá';
 import './index.less';
-
-const { Title, Text } = Typography;
 
 const formatVND = (n: number) => new Intl.NumberFormat('vi-VN').format(n);
 const getDish = (id: string) => SEED_MENU.find(d => d.id === id);
 
 const HistoryPage: React.FC = () => {
     const { orders, advanceOrder } = useModel('Khách Hàng.Orders');
+    const { setSearchQuery, setActiveCategory } = useModel('Khách Hàng.Thực đơn.index');
+    const { setPage } = useModel('Khách Hàng.global');
     const [filter, setFilter] = useState('active');
+    const [ratingOrder, setRatingOrder] = useState<any>(null);
 
     const filters = [
         { id: 'all', label: 'Tất cả' },
@@ -35,12 +36,19 @@ const HistoryPage: React.FC = () => {
         return true;
     });
 
+    const handleReorder = (order: any) => {
+        const firstName = order?.items?.[0]?.name || '';
+        setActiveCategory('all');
+        setSearchQuery(firstName);
+        setPage('menu');
+    };
+
     return (
         <div className="history-page-container">
             <div className="page-header">
                 <div>
-                    <Title level={2} className="page-title">Đơn của tôi</Title>
-                    <Text className="page-subtitle">Theo dõi trạng thái đơn ăn theo thời gian thực.</Text>
+                    <h1 className="page-title">Đơn của tôi</h1>
+                    <p className="page-subtitle">Theo dõi trạng thái đơn ăn theo thời gian thực.</p>
                 </div>
 
                 <div className="seg-radio">
@@ -59,8 +67,8 @@ const HistoryPage: React.FC = () => {
             {visibleOrders.length === 0 ? (
                 <div className="empty-state">
                     <div className="icon-wrapper"><FileTextOutlined /></div>
-                    <Title level={4}>Chưa có đơn nào</Title>
-                    <Text>Đặt món từ thực đơn để bắt đầu</Text>
+                    <h4>Chưa có đơn nào</h4>
+                    <span>Đặt món từ thực đơn để bắt đầu</span>
                 </div>
             ) : (
                 <div className="orders-grid">
@@ -69,7 +77,7 @@ const HistoryPage: React.FC = () => {
                         const pay = PAYMENT_METHODS[o.payment];
 
                         return (
-                            <div key={o.id} className="order-card">
+                            <div key={o.id} className={`order-card status-${o.status}`}>
                                 <div className="card-main">
                                     <div className="card-left">
                                         <div className="order-meta">
@@ -126,14 +134,37 @@ const HistoryPage: React.FC = () => {
                                                 Đã nhận món
                                             </Button>
                                         )}
-                                        <Button icon={<PrinterOutlined />}>Hoá đơn</Button>
-                                        <Button icon={<ReloadOutlined />} type="text">Đặt lại</Button>
+                                        
+                                        {o.status === 'done' && (
+                                            <>
+                                                <Button 
+                                                    className="btn-rate-order"
+                                                    onClick={() => setRatingOrder(o)}
+                                                >
+                                                    Đánh giá
+                                                </Button>
+                                                <Button 
+                                                    icon={<ReloadOutlined />} 
+                                                    type="text"
+                                                    onClick={() => handleReorder(o)}
+                                                >
+                                                    Đặt lại
+                                                </Button>
+                                            </>
+                                        )}
                                     </Space>
                                 </div>
                             </div>
                         );
                     })}
                 </div>
+            )}
+
+            {ratingOrder && (
+                <RatingPage 
+                    order={ratingOrder} 
+                    onClose={() => setRatingOrder(null)} 
+                />
             )}
         </div>
     );

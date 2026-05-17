@@ -37,7 +37,7 @@ export const ORDER_STATUSES: Record<OrderStatus, { label: string; color: string;
     pending:   { label: 'Chờ xác nhận', color: 'warn',  icon: React.createElement(ClockCircleOutlined) },
     preparing: { label: 'Đang nấu',     color: 'info',  icon: React.createElement(SyncOutlined, { spin: true }) },
     ready:     { label: 'Sẵn sàng',     color: 'green', icon: React.createElement(CheckCircleOutlined) },
-    done:      { label: 'Hoàn thành',   color: '',      icon: React.createElement(CheckCircleOutlined) },
+    done:      { label: 'Hoàn thành',   color: 'green', icon: React.createElement(CheckCircleOutlined) },
     cancelled: { label: 'Đã huỷ',       color: 'err',   icon: React.createElement(CloseCircleOutlined) },
 };
 

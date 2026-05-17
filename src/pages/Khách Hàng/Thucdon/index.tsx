@@ -5,7 +5,9 @@ import MenuHero from './component/hero';
 import DayTabs from './component/datetabs';
 import CategoryBar from './component/thanhlocdanhsach';
 import DishCard from './component/themonan';
+import DishDetailModal from './component/DishDetailModal';
 import './index.less';
+
 const EmployeeMenu: React.FC<EmployeeMenuProps> = ({ onOpenCart, ordersToday }) => {
     const {
         cart,
@@ -16,10 +18,13 @@ const EmployeeMenu: React.FC<EmployeeMenuProps> = ({ onOpenCart, ordersToday }) 
         todayTabIndex,
     } = useModel('Khách Hàng.Thực đơn.index');
     const [day, setDay] = useState(todayTabIndex);
+    const [selectedDish, setSelectedDish] = useState<any>(null);
+
     const cartQty = (id: string) => {
         const item = cart.find((c: any) => c.id === id);
         return item ? item.qty : 0;
     };
+
     return (
         <div className="employee-menu-container">
 
@@ -41,11 +46,25 @@ const EmployeeMenu: React.FC<EmployeeMenuProps> = ({ onOpenCart, ordersToday }) 
                         onAdd={() => addToCart(d)}
                         onInc={() => incCart(d.id)}
                         onDec={() => decCart(d.id)}
+                        onClick={() => setSelectedDish(d)}
                     />
                 ))}
             </div>
+
+            {/* Modal chi tiết món ăn */}
+            {selectedDish && (
+                <DishDetailModal
+                    dish={selectedDish}
+                    qty={cartQty(selectedDish.id)}
+                    onClose={() => setSelectedDish(null)}
+                    onAdd={() => { addToCart(selectedDish); }}
+                    onInc={() => incCart(selectedDish.id)}
+                    onDec={() => decCart(selectedDish.id)}
+                />
+            )}
         </div>
     );
 };
 
 export default EmployeeMenu;
+
