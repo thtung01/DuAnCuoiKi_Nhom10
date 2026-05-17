@@ -8,7 +8,7 @@ import GioHang from '../Giỏ Hàng';
 import './index.less';
 
 const MainPage: React.FC = () => {
-  const { page } = useModel('Khách Hàng.global');
+  const { page, theme } = useModel('Khách Hàng.global');
   const { setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
 
   const renderContent = () => {
@@ -23,7 +23,7 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <div className="main-page-container">
+    <div className={`main-page-container theme-${theme}`}>
       <Sidebar />
       <main className="content-area">
         <Topbar />

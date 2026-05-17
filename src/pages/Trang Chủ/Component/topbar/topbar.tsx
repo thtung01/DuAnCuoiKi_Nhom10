@@ -10,7 +10,7 @@ const Topbar: React.FC = () => {
         <div className="brand-wrapper">
           <img src="/logo.webp" alt="Logo" className="topbar-logo" />
           <div className="brand-text">
-            <span className="brand-name">Căn tin</span>
+            <span className="brand-name">Căng tin</span>
             <span className="brand-slogan">Doanh nghiệp</span>
           </div>
         </div>

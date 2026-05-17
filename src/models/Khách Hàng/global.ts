@@ -17,7 +17,7 @@ export default function useGlobalModel() {
   }, []);
 
   const breadcrumbs = useMemo(() => {
-    return ['Nhân viên', PAGE_TITLES[page] || page];
+    return ['Khách hàng', PAGE_TITLES[page] || page];
   }, [page]);
 
   return {

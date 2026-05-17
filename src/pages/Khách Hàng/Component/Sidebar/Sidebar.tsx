@@ -21,7 +21,7 @@ const Sidebar: React.FC = () => {
       <div className="brand">
         <img src="/logo.webp" alt="Logo" className="brand-logo" />
         <div className="brand-text">
-          <div className="brand-name">Căn tin</div>
+          <div className="brand-name">Căng tin</div>
           <div className="brand-sub">DOANH NGHIỆP</div>
         </div>
       </div>

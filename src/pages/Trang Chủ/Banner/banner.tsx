@@ -8,7 +8,7 @@ const Banner: React.FC = () => {
         <div className="banner-container">
             <div className="banner-content-left">
                 <h1 className="banner-title">
-                    <span className="text-dark">Căn tin</span><br />
+                    <span className="text-dark">Căng tin</span><br />
                 </h1>
                 <div className="banner-description-box">
                     <p className="banner-description">

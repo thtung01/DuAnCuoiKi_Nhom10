@@ -8,7 +8,7 @@ const AppFooter: React.FC = () => {
       <div className="modern-footer-container">
         <div className="footer-column brand-column">
           <div className="brand-logo">
-            <img src="/logo.webp" alt="Logo Căn tin Hiện đại" className="logo-img" />
+            <img src="/logo.webp" alt="Logo Căng tin Hiện đại" className="logo-img" />
           </div>
           <p className="brand-description">
             Trải nghiệm ẩm thực tuyệt vời<br />trong không gian hiện đại.

@@ -126,11 +126,11 @@
 
     &.active {
       background: var(--ink);
-      color: white;
+      color: var(--bg);
       border-color: var(--ink);
       
       .day-name {
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--bg-mute);
       }
     }
     
@@ -235,12 +235,12 @@
 
     &.active {
       background: var(--ink);
-      color: white;
+      color: var(--bg);
       border-color: var(--ink);
       
       .count {
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
+        background: var(--bg-mute);
+        color: var(--ink);
       }
     }
     
@@ -402,7 +402,7 @@
     height: 36px;
     border-radius: 12px;
     background: var(--ink);
-    color: white;
+    color: var(--bg);
     display: grid;
     place-items: center;
     transition: all 0.2s;
