@@ -12,6 +12,7 @@ export interface CartOptionProps {
     onChangeNote: (note: string) => void;
     selectedVoucher?: Voucher;
     onSelectVoucher: (voucher: Voucher | undefined) => void;
+    subtotal: number;
 }
 
 // ─── Dữ liệu Voucher mẫu ─────────────────────────────────────────────────────

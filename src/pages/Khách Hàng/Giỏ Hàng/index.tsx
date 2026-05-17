@@ -19,6 +19,7 @@ const GioHang: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const cartQty = cart.reduce((s: number, i: any) => s + i.qty, 0);
+    const subtotal = cart.reduce((s: number, i: any) => s + i.price * i.qty, 0);
 
     // ── Xác nhận đặt món ──────────────────────────────────────────────────────
     const handleConfirm = () => {
@@ -74,6 +75,7 @@ const GioHang: React.FC = () => {
                             onChangeNote={setNote}
                             selectedVoucher={selectedVoucher}
                             onSelectVoucher={setSelectedVoucher}
+                            subtotal={subtotal}
                         />
                     </section>
 

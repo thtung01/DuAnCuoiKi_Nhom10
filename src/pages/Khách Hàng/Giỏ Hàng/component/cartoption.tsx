@@ -42,11 +42,11 @@ const CartOption: React.FC<CartOptionProps> = ({
     onChangeNote,
     selectedVoucher,
     onSelectVoucher,
+    subtotal,
 }) => {
     const [isVoucherModalOpen, setIsVoucherModalOpen] = useState(false);
     const { cart } = useModel('Khách Hàng.Thực đơn.index');
 
-    // Tính giờ nhận — cập nhật mỗi khi giỏ thay đổi hoặc mỗi phút
     const [pickup, setPickup] = useState(() => calcPickupTime(cart));
 
     useEffect(() => {
@@ -54,6 +54,23 @@ const CartOption: React.FC<CartOptionProps> = ({
         const timer = setInterval(() => setPickup(calcPickupTime(cart)), 60000);
         return () => clearInterval(timer);
     }, [cart]);
+
+    const availableVouchers = SEED_VOUCHERS.filter(v => !v.minOrder || subtotal >= v.minOrder);
+    const unavailableVouchers = SEED_VOUCHERS.filter(v => v.minOrder && subtotal < v.minOrder);
+
+    const [tempSelectedId, setTempSelectedId] = useState<string | undefined>(selectedVoucher?.id);
+
+    useEffect(() => {
+        if (isVoucherModalOpen) {
+            setTempSelectedId(selectedVoucher?.id);
+        }
+    }, [isVoucherModalOpen, selectedVoucher]);
+
+    const confirmSelection = () => {
+        const v = SEED_VOUCHERS.find(x => x.id === tempSelectedId);
+        onSelectVoucher(v);
+        setIsVoucherModalOpen(false);
+    };
 
     return (
         <div className="cart-options-container">
@@ -96,7 +113,7 @@ const CartOption: React.FC<CartOptionProps> = ({
                         </div>
                     ) : (
                         <div className="placeholder">
-                            <span>Chọn hoặc nhập mã giảm giá</span>
+                            <span>Chọn Voucher</span>
                         </div>
                     )}
                     <RightOutlined className="arrow" />
@@ -118,46 +135,96 @@ const CartOption: React.FC<CartOptionProps> = ({
                 />
             </div>
 
-            {/* Modal danh sách Voucher */}
+            {/* Modal danh sách Voucher giống thiết kế */}
             <Modal
-                title="Chọn Voucher"
-                open={isVoucherModalOpen}
+                title={false}
+                visible={isVoucherModalOpen}
                 onCancel={() => setIsVoucherModalOpen(false)}
                 footer={null}
-                width={400}
-                className="voucher-modal"
+                width={450}
+                className="voucher-modal-custom"
+                style={{ top: 40 }}
+                getContainer={() => document.querySelector('.main-page-container') as HTMLElement || document.body}
             >
-                <div className="voucher-list">
-                    {SEED_VOUCHERS.map(v => (
-                        <div
-                            key={v.id}
-                            className={`voucher-item ${selectedVoucher?.id === v.id ? 'active' : ''}`}
-                            onClick={() => {
-                                onSelectVoucher(v);
-                                setIsVoucherModalOpen(false);
-                            }}
-                        >
-                            <div className="v-icon">
-                                <TagOutlined />
-                            </div>
-                            <div className="v-content">
-                                <div className="v-code">{v.code}</div>
-                                <div className="v-desc">{v.desc}</div>
-                            </div>
-                            {selectedVoucher?.id === v.id && <CheckCircleFilled className="v-check" />}
+                <div className="vm-header">
+                    <button className="vm-back" onClick={() => setIsVoucherModalOpen(false)}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    </button>
+                    <h2>Chọn Voucher</h2>
+                </div>
+
+                <div className="vm-body">
+                    {availableVouchers.length > 0 && (
+                        <div className="vm-section">
+                            <h3 className="vm-section-title">Voucher khả dụng</h3>
+                            {availableVouchers.map(v => (
+                                <div 
+                                    key={v.id} 
+                                    className={`vm-ticket ${tempSelectedId === v.id ? 'selected' : ''}`}
+                                    onClick={() => setTempSelectedId(v.id)}
+                                >
+                                    <div className="vmt-left">
+                                        <div className="vmt-icon">
+                                            <TagOutlined style={{ fontSize: 24, marginBottom: 4 }} />
+                                            <span>Mã giảm giá</span>
+                                        </div>
+                                    </div>
+                                    <div className="vmt-right">
+                                        <div className="vmt-info">
+                                            <h4>{v.desc}</h4>
+                                            {v.minOrder ? <p>Đơn từ {v.minOrder / 1000}k</p> : <p>Mọi đơn hàng</p>}
+                                            <div className="vmt-meta">
+                                                <span className="badge">Ưu đãi có hạn</span>
+                                                <span className="date">HSD: 31.05.2026 <a>Điều kiện</a></span>
+                                            </div>
+                                        </div>
+                                        <div className="vmt-radio">
+                                            <div className="radio-circle">
+                                                {tempSelectedId === v.id && <div className="radio-dot" />}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                    {selectedVoucher && (
-                        <button
-                            className="remove-voucher-btn"
-                            onClick={() => {
-                                onSelectVoucher(undefined);
-                                setIsVoucherModalOpen(false);
-                            }}
-                        >
-                            Bỏ chọn Voucher
-                        </button>
                     )}
+
+                    {unavailableVouchers.length > 0 && (
+                        <div className="vm-section">
+                            <h3 className="vm-section-title">Voucher không khả dụng</h3>
+                            {unavailableVouchers.map(v => (
+                                <div key={v.id} className="vm-ticket disabled">
+                                    <div className="vmt-left">
+                                        <div className="vmt-icon">
+                                            <TagOutlined style={{ fontSize: 24, marginBottom: 4 }} />
+                                            <span>Mã giảm giá</span>
+                                        </div>
+                                    </div>
+                                    <div className="vmt-right">
+                                        <div className="vmt-info">
+                                            <h4>{v.desc}</h4>
+                                            <p>Đơn từ {v.minOrder! / 1000}k</p>
+                                            <div className="vmt-meta">
+                                                <span className="badge">Ưu đãi có hạn</span>
+                                                <span className="date">HSD: 31.05.2026 <a>Điều kiện</a></span>
+                                            </div>
+                                        </div>
+                                        <div className="vmt-radio">
+                                            <div className="radio-circle" />
+                                        </div>
+                                    </div>
+                                    <div className="vmt-warning">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                        <span>Chưa đạt giá trị đơn hàng tối thiểu</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <div className="vm-footer">
+                    <button className="vm-ok-btn" onClick={confirmSelection}>OK</button>
                 </div>
             </Modal>
         </div>
