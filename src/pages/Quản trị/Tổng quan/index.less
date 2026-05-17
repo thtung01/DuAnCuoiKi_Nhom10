@@ -79,11 +79,47 @@
 .canh-bao-kho {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
-.canh-bao-kho-list {
+.inv-bar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  padding: 12px 14px;
+  background: var(--bg-soft);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--warn-500);
+
+  &.critical {
+    border-left-color: var(--err-500);
+    background: rgba(230, 57, 70, 0.05);
+  }
+}
+
+.inv-bar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 8px;
+}
+
+.inv-bar-track {
+  height: 8px;
+  background: var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.inv-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--warn-500);
+  transition: width 0.3s ease;
+
+  &.err {
+    background: var(--err-500);
+  }
 }

@@ -7,7 +7,6 @@ import {
   UnorderedListOutlined,
   InboxOutlined,
   TeamOutlined,
-  BarChartOutlined,
   LogoutOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
@@ -26,7 +25,6 @@ const NAV_ADMIN: NavItem[] = [
   { id: 'menu-mgmt',  label: 'Thực đơn',        icon: <UnorderedListOutlined /> },
   { id: 'inventory',  label: 'Kho nguyên liệu', icon: <InboxOutlined /> },
   { id: 'users',      label: 'Người dùng',      icon: <TeamOutlined /> },
-  { id: 'reports',    label: 'Báo cáo',         icon: <BarChartOutlined /> },
 ];
 
 const AdminSidebar: React.FC = () => {
@@ -34,7 +32,7 @@ const AdminSidebar: React.FC = () => {
   const { orders } = useModel('Quản trị.kitchen');
   const { inventory } = useModel('Quản trị.inventory');
 
-  const pendingCount = orders.filter(o => o.status === 'pending').length;
+  const pendingCount  = orders.filter(o => o.status === 'pending').length;
   const lowStockCount = inventory.filter(i => i.stock < i.threshold).length;
 
   const authUser = getUser();
@@ -43,23 +41,20 @@ const AdminSidebar: React.FC = () => {
     : { avatar: 'LN', name: 'Lê Hoàng Nam', dept: 'Quản trị' };
 
   const getBadge = (id: AdminPage): number => {
-    if (id === 'kitchen') return pendingCount;
+    if (id === 'kitchen')   return pendingCount;
     if (id === 'inventory') return lowStockCount;
     return 0;
   };
 
-  const handleLogout = () => {
-    logout();
-    history.push('/');
-  };
+  const handleLogout = () => { logout(); history.push('/'); };
 
   return (
     <aside className="sidebar">
       <div className="brand">
-        <div className="brand-mark">B</div>
-        <div>
-          <div className="brand-name">Bữa</div>
-          <div className="brand-sub">Canteen OS</div>
+        <img src="/logo.webp" alt="Logo" className="brand-logo" />
+        <div className="brand-text">
+          <div className="brand-name">Căn tin</div>
+          <div className="brand-sub">Quản trị</div>
         </div>
       </div>
 
@@ -95,12 +90,7 @@ const AdminSidebar: React.FC = () => {
           <span className="name">{displayUser.name}</span>
           <span className="role">{displayUser.dept}</span>
         </div>
-        <button
-          className="icon-btn"
-          style={{ width: 28, height: 28 }}
-          title="Đăng xuất"
-          onClick={handleLogout}
-        >
+        <button className="icon-btn logout-btn" title="Đăng xuất" onClick={handleLogout}>
           <LogoutOutlined style={{ fontSize: 14 }} />
         </button>
       </div>

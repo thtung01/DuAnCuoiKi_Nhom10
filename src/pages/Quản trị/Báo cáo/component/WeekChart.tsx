@@ -7,7 +7,7 @@ const WeekChart: React.FC = () => {
     <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14, height: 180, padding: '10px 0' }}>
       {WEEK_REVENUE.map(w => (
         <div key={w.d} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-          <div className="mono" style={{ fontSize: 10, color: 'var(--ink-3)' }}>{(w.v / 1000000).toFixed(1)}M</div>
+          <div className="mono" style={{ fontSize: 11, fontWeight: 700, color: 'var(--ink-2)' }}>{(w.v / 1000000).toFixed(1)}M</div>
           <div style={{
             width: '100%',
             height: `${(w.v / maxRev) * 140}px`,
@@ -15,7 +15,7 @@ const WeekChart: React.FC = () => {
             borderRadius: '8px 8px 4px 4px',
             minHeight: 8,
           }} />
-          <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--ink-2)' }}>{w.d}</div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--ink-1)' }}>{w.d}</div>
         </div>
       ))}
     </div>

@@ -55,13 +55,16 @@ export default defineConfig({
 	// mfsu: {},
 	webpack5: {},
 	exportStatic: {},
-	define: Object.entries(process.env).reduce((result, [key, value]) => {
-		if (key.startsWith('APP_CONFIG_')) {
-			return {
-				...result,
-				[key]: value,
-			};
-		}
-		return result;
-	}, {}),
+	define: {
+		APP_CONFIG_TIEN_TO_TRUONG: process.env.APP_CONFIG_TIEN_TO_TRUONG || 'Học viện',
+		...Object.entries(process.env).reduce((result, [key, value]) => {
+			if (key.startsWith('APP_CONFIG_')) {
+				return {
+					...result,
+					[key]: value,
+				};
+			}
+			return result;
+		}, {}),
+	},
 });

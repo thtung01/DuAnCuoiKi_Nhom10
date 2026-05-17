@@ -27,8 +27,7 @@ export type AdminPage =
   | 'kitchen'
   | 'menu-mgmt'
   | 'inventory'
-  | 'users'
-  | 'reports';
+  | 'users';
 
 export type DeltaDir = 'up' | 'down' | '';
 

@@ -8,8 +8,8 @@ const PIE_DATA = [
 ];
 
 const PaymentPie: React.FC = () => (
-  <div style={{ display: 'flex', alignItems: 'center', gap: 24, padding: '8px 0' }}>
-    <svg width="140" height="140" viewBox="0 0 42 42" style={{ flexShrink: 0 }}>
+  <div style={{ display: 'flex', alignItems: 'center', gap: 32, padding: '12px 0' }}>
+    <svg width="180" height="180" viewBox="0 0 42 42" style={{ flexShrink: 0 }}>
       <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="var(--bg-soft)"    strokeWidth="6" />
       <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="var(--green-500)"  strokeWidth="6" strokeDasharray="42 100" strokeDashoffset="0"   transform="rotate(-90 21 21)" />
       <circle cx="21" cy="21" r="15.9" fill="transparent" stroke="var(--info-500)"   strokeWidth="6" strokeDasharray="28 100" strokeDashoffset="-42"  transform="rotate(-90 21 21)" />

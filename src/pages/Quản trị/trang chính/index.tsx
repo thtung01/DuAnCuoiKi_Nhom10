@@ -7,7 +7,6 @@ import BangBep from '../Bảng bếp';
 import ThucDonAdmin from '../Thực đơn';
 import KhoNguyenLieu from '../Kho nguyên liệu';
 import NguoiDung from '../Người dùng';
-import BaoCao from '../Báo cáo';
 import './admin.less';
 import './index.less';
 
@@ -21,7 +20,6 @@ const AdminPage: React.FC = () => {
       case 'menu-mgmt':  return <ThucDonAdmin />;
       case 'inventory':  return <KhoNguyenLieu />;
       case 'users':      return <NguoiDung />;
-      case 'reports':    return <BaoCao />;
       default:           return <TongQuan />;
     }
   };

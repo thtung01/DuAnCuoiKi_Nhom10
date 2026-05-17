@@ -7,7 +7,6 @@ const PAGE_LABELS: Record<AdminPage, string> = {
   'menu-mgmt': 'Thực đơn',
   inventory:   'Kho nguyên liệu',
   users:       'Người dùng',
-  reports:     'Báo cáo',
 };
 
 export default function useAdminGlobalModel() {
