@@ -23,6 +23,8 @@ const ThongBao: React.FC = () => {
             className="notification-drawer"
             width={450}
             bodyStyle={{ padding: 0 }}
+            getContainer={false}
+            style={{ position: 'absolute' }}
         >
             <div className="custom-drawer-header">
                 <div className="title-left">
