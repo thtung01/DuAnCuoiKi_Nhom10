@@ -183,24 +183,84 @@
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-  .sliderContainer .contentWrapper {
-    flex-direction: column;
-    padding-top: 40px;
-    
-    .leftContent {
-      padding-right: 0;
-      margin-bottom: 40px;
-      
-      .foodName { font-size: 3rem; }
+  .sliderContainer {
+    height: auto;
+    min-height: 100vh;
+
+    .overlay {
+      background: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.9) 100%);
     }
-    
-    .rightContent {
-      padding-top: 0;
-      width: 100%;
+
+    .contentWrapper {
+      flex-direction: column;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      justify-content: space-between; /* Đẩy nội dung bên dưới (thumbnails) xuống sát đáy */
+      height: 100%;
+      min-height: calc(100vh - 80px);
       
-      .thumbnailsWrapper .thumbnailCard {
-        width: 140px;
-        height: 200px;
+      .topTitle {
+        position: relative; /* Đưa về dạng flow thường, không dùng absolute để tuyệt đối không bị đè chữ */
+        top: auto;
+        left: auto;
+        transform: none;
+        font-size: 1.6rem;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 100%;
+      }
+      
+      .leftContent {
+        padding-right: 0;
+        margin-bottom: 24px;
+        width: 100%;
+        text-align: center; /* Căn giữa tiêu đề chính trên di động */
+        flex: none; /* Không chiếm dụng flex để chừa không gian co giãn */
+        
+        .foodName { 
+          font-size: 2.6rem; 
+          margin-bottom: 12px;
+        }
+
+        .description {
+          font-size: 1rem;
+          max-width: 100%;
+          margin-bottom: 10px;
+        }
+      }
+      
+      .rightContent {
+        padding-top: 0;
+        width: 100%;
+        align-items: center; /* Căn giữa nội dung bên phải */
+        justify-content: flex-end; /* Đẩy sát xuống dưới */
+        flex: 1;
+        margin-top: auto;
+        
+        .thumbnailsWrapper {
+          width: 100%;
+          justify-content: center;
+          gap: 12px;
+          margin-bottom: 20px;
+
+          .thumbnailCard {
+            width: 110px; /* Thu nhỏ thẻ thu nhỏ trên di động để vừa màn hình */
+            height: 160px;
+            
+            .thumbnailInfo {
+              padding: 10px 8px 8px;
+              h5 {
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
+
+        .bottomControls {
+          justify-content: center; /* Căn giữa nút điều hướng mũi tên */
+        }
       }
     }
   }
@@ -208,12 +268,36 @@
 
 @media (max-width: 768px) {
   .sliderContainer {
-    height: auto;
-    min-height: 100vh;
-  }
-  .sliderContainer .contentWrapper .leftContent .foodName { font-size: 2.5rem; }
-  .sliderContainer .contentWrapper .rightContent .thumbnailsWrapper {
-    overflow-x: auto;
-    padding-bottom: 20px;
+    .contentWrapper {
+      padding-top: 20px;
+      min-height: calc(100vh - 80px);
+      
+      .topTitle {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+      }
+
+      .leftContent {
+        .foodName { 
+          font-size: 2.0rem; 
+        }
+      }
+
+      .rightContent {
+        .thumbnailsWrapper {
+          justify-content: flex-start; /* Cho phép vuốt ngang tự nhiên trên điện thoại nhỏ */
+          overflow-x: auto;
+          padding: 10px 4px 15px;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+          
+          /* Ẩn thanh cuộn mặc định của trình duyệt */
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          scrollbar-width: none;
+        }
+      }
+    }
   }
 }

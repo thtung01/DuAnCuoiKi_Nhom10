@@ -398,3 +398,114 @@
     color: #333;
   }
 }
+
+/* Responsive Đơn Hàng */
+@media (max-width: 768px) {
+  .history-page-container {
+    padding: 16px 12px;
+    
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+      
+      .page-title {
+        font-size: 22px;
+      }
+      
+      .seg-radio {
+        width: 100%;
+        display: flex;
+        
+        button {
+          flex: 1;
+          padding: 8px 0;
+          text-align: center;
+          font-size: 12px;
+        }
+      }
+    }
+
+    .order-card {
+      .card-main {
+        grid-template-columns: 1fr; /* Một cột dọc duy nhất */
+        padding: 16px;
+        gap: 20px;
+      }
+
+      .order-meta {
+        gap: 8px;
+        margin-bottom: 12px;
+        
+        .pickup-time {
+          width: 100%;
+          margin-top: 4px;
+        }
+      }
+
+      .card-side {
+        text-align: left;
+        min-width: 100%;
+        border-top: 1px dashed var(--line, #ebebeb);
+        padding-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+
+        .total-label {
+          margin-bottom: 2px;
+          width: 100%; /* Đưa label lên dòng riêng biệt của cột thanh toán */
+        }
+
+        .total-value {
+          font-size: 22px;
+        }
+
+        .payment-method {
+          margin-top: 0;
+        }
+      }
+
+      .order-note {
+        padding: 10px 16px;
+        font-size: 12px;
+      }
+
+      .card-actions {
+        padding: 12px 16px;
+        
+        .ant-space {
+          width: 100%;
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .tracker {
+    padding: 6px 0;
+  }
+  
+  .tracker-step {
+    .dot {
+      width: 22px;
+      height: 22px;
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+    
+    &::before {
+      top: 11px;
+    }
+    
+    .label {
+      font-size: 9px;
+      letter-spacing: -0.3px;
+    }
+  }
+}

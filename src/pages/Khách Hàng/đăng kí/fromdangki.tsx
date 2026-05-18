@@ -3,7 +3,11 @@ import { GoogleOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import { history } from 'umi';
 
-const RegisterForm: React.FC = () => {
+interface RegisterFormProps {
+    onToggle?: () => void;
+}
+
+const RegisterForm: React.FC<RegisterFormProps> = ({ onToggle }) => {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
 
@@ -46,6 +50,9 @@ const RegisterForm: React.FC = () => {
                         <span className="text">Google</span>
                     </a>
                 </div>
+            </div>
+            <div className="mobile-toggle">
+                Đã có tài khoản? <span onClick={onToggle}>Đăng nhập ngay</span>
             </div>
         </form>
     );

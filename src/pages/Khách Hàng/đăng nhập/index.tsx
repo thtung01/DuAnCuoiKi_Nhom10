@@ -12,11 +12,11 @@ const SignInPage: React.FC = () => {
       <div className={`auth-container ${isSignUp ? 'right-panel-active' : ''}`}>
         
         <div className="form-container sign-up-container">
-          <RegisterForm />
+          <RegisterForm onToggle={() => setIsSignUp(false)} />
         </div>
 
         <div className="form-container sign-in-container">
-          <LoginForm />
+          <LoginForm onToggle={() => setIsSignUp(true)} />
         </div>
 
         <div className="overlay-container">

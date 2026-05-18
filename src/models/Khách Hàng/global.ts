@@ -15,6 +15,7 @@ export default function useGlobalModel() {
     return (savedTheme as ThemeType) || ThemeType.LIGHT;
   });
   const [page, setPage] = useState('menu');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Lưu theme vào localStorage mỗi khi có thay đổi
   useEffect(() => {
@@ -35,6 +36,8 @@ export default function useGlobalModel() {
     setTheme,
     page,
     setPage,
-    breadcrumbs
+    breadcrumbs,
+    isSidebarOpen,
+    setIsSidebarOpen
   };
 }

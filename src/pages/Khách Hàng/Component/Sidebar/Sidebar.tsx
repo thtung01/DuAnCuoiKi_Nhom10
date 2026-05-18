@@ -10,7 +10,7 @@ import { NAV_EMPLOYEE, defaultUser } from '@/services/Khách hàng/Sidebar';
 import { useModel, history } from 'umi';
 
 const Sidebar: React.FC = () => {
-  const { page, setPage } = useModel('Khách Hàng.global');
+  const { page, setPage, isSidebarOpen, setIsSidebarOpen } = useModel('Khách Hàng.global');
   const { role, setRole, currentUser } = useModel('Khách Hàng.user');
   const { cart, setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
   const { unreadCount, setIsNotificationOpen } = useModel('Khách Hàng.Notifications');
@@ -18,7 +18,11 @@ const Sidebar: React.FC = () => {
   const user = currentUser || defaultUser;
 
   return (
-    <aside className="sidebar">
+    <>
+      {isSidebarOpen && (
+        <div className="sidebar-backdrop" onClick={() => setIsSidebarOpen(false)} />
+      )}
+      <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
       <div className="brand">
         <img src="/logo.webp" alt="Logo" className="brand-logo" />
         <div className="brand-text">
@@ -50,6 +54,7 @@ const Sidebar: React.FC = () => {
                 } else {
                   setPage(item.id);
                 }
+                setIsSidebarOpen(false); // Close sidebar on mobile item click
               }}
             >
               <Icon style={{ fontSize: '18px' }} />
@@ -62,13 +67,13 @@ const Sidebar: React.FC = () => {
 
       <nav className="nav-section">
         <div className="nav-label">KHÁC</div>
-        <button className="nav-item" onClick={() => setIsNotificationOpen(true)}>
+        <button className="nav-item" onClick={() => { setIsNotificationOpen(true); setIsSidebarOpen(false); }}>
           <BellOutlined style={{ fontSize: '18px' }} /> Thông báo
           {unreadCount > 0 && <span className="badge notification-badge">{unreadCount}</span>}
         </button>
         <button 
           className={`nav-item ${page === 'settings' ? 'active' : ''}`} 
-          onClick={() => setPage('settings')}
+          onClick={() => { setPage('settings'); setIsSidebarOpen(false); }}
         >
           <SettingOutlined style={{ fontSize: '18px' }} /> Cài đặt
         </button>
@@ -90,7 +95,8 @@ const Sidebar: React.FC = () => {
           <LogoutOutlined style={{ fontSize: '16px' }} />
         </button>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 };
 

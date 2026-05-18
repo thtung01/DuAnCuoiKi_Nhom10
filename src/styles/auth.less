@@ -284,3 +284,108 @@ input {
     }
   }
 }
+
+/* Responsive auth layout for mobile */
+@media (max-width: 768px) {
+  .auth-body {
+    padding: 16px;
+    background: #f8f9fa;
+  }
+
+  .auth-container {
+    width: 100%;
+    max-width: 450px;
+    min-height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    background: #fff;
+    overflow: visible;
+  }
+
+  .overlay-container {
+    display: none !important; /* Tuyệt đối ẩn khung ảnh trượt trên di động */
+  }
+
+  .form-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: none; /* Ẩn cả 2 khung mặc định */
+    transition: none;
+    transform: none !important;
+  }
+
+  /* Chỉ hiển thị khung tương ứng với trạng thái */
+  .auth-container:not(.right-panel-active) .sign-in-container {
+    display: block;
+  }
+
+  .auth-container.right-panel-active .sign-up-container {
+    display: block;
+    opacity: 1;
+    z-index: 5;
+    animation: none;
+  }
+
+  form {
+    padding: 40px 24px;
+    height: auto;
+    
+    h1 {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+  }
+
+  input {
+    padding: 14px 16px;
+    font-size: 15px;
+    margin: 6px 0;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px 0;
+    margin-top: 16px;
+    font-size: 15px;
+  }
+
+  .social-login {
+    margin-top: 24px;
+    
+    .social-btn {
+      width: 100% !important;
+      justify-content: center;
+      
+      .text {
+        opacity: 1 !important;
+      }
+      
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+
+  /* Hiển thị liên kết chuyển đổi trên điện thoại */
+  .mobile-toggle {
+    display: block !important;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #8c8c8c;
+    width: 100%;
+    text-align: center;
+    
+    span {
+      color: @primary-green;
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 4px;
+      
+      &:hover {
+        color: @hover-green;
+        text-decoration: underline;
+      }
+    }
+  }
+}

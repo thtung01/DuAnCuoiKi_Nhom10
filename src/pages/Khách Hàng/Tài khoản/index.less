@@ -4,6 +4,10 @@
     max-width: 100%;
     margin: 0;
 
+    @media (max-width: 768px) {
+        padding: 16px;
+    }
+
     .page-header {
         margin-bottom: 24px;
         h2 {
@@ -41,6 +45,11 @@
         min-width: 300px;
         max-width: 350px;
         text-align: center;
+
+        @media (max-width: 768px) {
+            max-width: 100%;
+            width: 100%;
+        }
 
         .avatar-section {
             display: flex;
@@ -96,6 +105,10 @@
     .profile-content {
         flex: 2;
 
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+
         .section-title {
             font-size: 16px;
             font-weight: 600;
@@ -106,6 +119,12 @@
             
             &.mt-4 {
                 margin-top: 32px;
+            }
+
+            @media (max-width: 768px) {
+                font-size: 18px; /* Tăng kích thước tiêu đề mục trên di động */
+                margin-bottom: 20px;
+                margin-top: 24px;
             }
         }
 
@@ -127,12 +146,28 @@
             .ant-form-item-label > label {
                 color: var(--ink);
                 font-weight: 500;
+
+                @media (max-width: 768px) {
+                    font-size: 15px; /* Chữ nhãn (Label) to hơn và đậm hơn trên di động */
+                    font-weight: 600;
+                }
+            }
+
+            .ant-input {
+                @media (max-width: 768px) {
+                    padding: 10px 14px !important; /* Tăng khoảng đệm của ô input trên di động */
+                    font-size: 15px !important;
+                }
             }
 
             .form-actions {
                 margin-top: 32px;
                 display: flex;
                 justify-content: flex-end;
+
+                @media (max-width: 768px) {
+                    margin-top: 24px;
+                }
 
                 .btn-save {
                     border-radius: 8px;
@@ -143,6 +178,12 @@
                     
                     &:hover {
                         opacity: 0.9;
+                    }
+
+                    @media (max-width: 768px) {
+                        width: 100%; /* Nút bấm full-width dễ chạm */
+                        height: 46px !important;
+                        font-size: 15px !important;
                     }
                 }
             }

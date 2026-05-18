@@ -28,7 +28,7 @@ const AppFooter: React.FC = () => {
         <div className="footer-column contact-column">
           <h4 className="footer-heading">Liên hệ</h4>
           <ul className="footer-contact-info">
-            <li>123 Đại lộ Hiện đại, Quận Ẩm thực</li>
+            <li>Công ty doanh nghiệp</li>
             <li><a href="mailto:contact@cantinhiendai.com">contact@cantinhiendai.com</a></li>
             <li><a href="tel:+84123456789">+84 123 456 789</a></li>
           </ul>
@@ -37,12 +37,12 @@ const AppFooter: React.FC = () => {
         <div className="footer-column social-column">
           <h4 className="footer-heading">Theo dõi chúng tôi</h4>
           <div className="social-container">
-            <a href="#" className="social-btn facebook">
+            <a href="https://www.facebook.com/" className="social-btn facebook">
               <FacebookOutlined className="icon" />
               <span className="text">Facebook</span>
             </a>
 
-            <a href="#" className="social-btn instagram">
+            <a href="https://www.instagram.com/" className="social-btn instagram">
               <InstagramOutlined className="icon" />
               <span className="text">Instagram</span>
             </a>
