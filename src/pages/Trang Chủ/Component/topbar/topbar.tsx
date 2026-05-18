@@ -16,15 +16,15 @@ const Topbar: React.FC = () => {
         </div>
       </div>
       <div className="topbar-right">
-        <Button 
-          className="btn-login" 
-          type="text" 
+        <Button
+          className="btn-login"
+          type="text"
           onClick={() => history.push('/dang-nhap')}
         >
           Đăng nhập
         </Button>
-        <Button 
-          className="btn-register" 
+        <Button
+          className="btn-register"
           type="primary"
           onClick={() => history.push('/dang-ky')}
         >

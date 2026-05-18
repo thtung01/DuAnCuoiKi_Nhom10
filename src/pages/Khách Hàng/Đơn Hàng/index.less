@@ -49,12 +49,14 @@
       cursor: pointer;
       transition: all 0.2s;
 
-      &:hover { color: #222; }
+      &:hover {
+        color: #222;
+      }
 
       &.active {
         background: #fff;
         color: #2f8f4e;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       }
     }
   }
@@ -76,7 +78,7 @@
     width: 100%;
 
     &:hover {
-      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
       transform: translateY(-2px);
     }
 
@@ -111,7 +113,11 @@
       .pickup-time {
         font-size: 12px;
         color: #999;
-        strong { color: #333; font-weight: 700; }
+
+        strong {
+          color: #333;
+          font-weight: 700;
+        }
       }
     }
 
@@ -133,9 +139,20 @@
         border-radius: 8px;
         border: 1px solid #f0f0f0;
 
-        .emoji { font-size: 22px; }
-        .name  { flex: 1; font-weight: 500; }
-        .qty   { color: #bbb; font-family: monospace; font-weight: 700; }
+        .emoji {
+          font-size: 22px;
+        }
+
+        .name {
+          flex: 1;
+          font-weight: 500;
+        }
+
+        .qty {
+          color: #bbb;
+          font-family: monospace;
+          font-weight: 700;
+        }
       }
     }
 
@@ -232,10 +249,25 @@
     background: #f1f3f5;
     color: #555;
 
-    &.green { background: #dff2e4; color: #1f6b39; }
-    &.warn  { background: #fff9db; color: #c47900; }
-    &.err   { background: #fff0f0; color: #c92a2a; }
-    &.info  { background: #e8f4ff; color: #1a6eb5; }
+    &.green {
+      background: #dff2e4;
+      color: #1f6b39;
+    }
+
+    &.warn {
+      background: #fff9db;
+      color: #c47900;
+    }
+
+    &.err {
+      background: #fff0f0;
+      color: #c92a2a;
+    }
+
+    &.info {
+      background: #e8f4ff;
+      color: #1a6eb5;
+    }
 
     .dot-status {
       width: 7px;
@@ -243,10 +275,21 @@
       border-radius: 50%;
       background: #adb5bd;
 
-      &.green { background: #2f8f4e; }
-      &.warn  { background: #f59f00; }
-      &.err   { background: #fa5252; }
-      &.info  { background: #228be6; }
+      &.green {
+        background: #2f8f4e;
+      }
+
+      &.warn {
+        background: #f59f00;
+      }
+
+      &.err {
+        background: #fa5252;
+      }
+
+      &.info {
+        background: #228be6;
+      }
     }
   }
 
@@ -266,8 +309,16 @@
       margin-bottom: 20px;
     }
 
-    h4 { color: #555; margin: 0 0 8px; font-size: 18px; }
-    span { font-size: 14px; color: #aaa; }
+    h4 {
+      color: #555;
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    span {
+      font-size: 14px;
+      color: #aaa;
+    }
   }
 }
 
@@ -298,8 +349,13 @@
     z-index: 0;
   }
 
-  &:last-child::before { display: none; }
-  &.done::before { background: #2f8f4e; }
+  &:last-child::before {
+    display: none;
+  }
+
+  &.done::before {
+    background: #2f8f4e;
+  }
 
   .dot {
     width: 28px;

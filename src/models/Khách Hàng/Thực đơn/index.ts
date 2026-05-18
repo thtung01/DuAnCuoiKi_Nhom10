@@ -95,6 +95,10 @@ export default function useCartModel() {
     setCart(prev => prev.map(item => item.id === id ? { ...item, qty: item.qty - 1 } : item).filter(item => item.qty > 0));
   }, []);
 
+  const clearCart = useCallback(() => {
+    setCart([]);
+  }, []);
+
   // ─── Lọc thực đơn theo danh mục và từ khóa tìm kiếm ──────────────────────────────
   const filteredMenu = useMemo(() => {
     let result = activeCategory === 'all' ? SEED_MENU : SEED_MENU.filter(d => d.cat === activeCategory);
@@ -128,6 +132,7 @@ export default function useCartModel() {
     addToCart,
     incCart,
     decCart,
+    clearCart,
     // thực đơn
     activeCategory,
     setActiveCategory,

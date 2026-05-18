@@ -10,7 +10,9 @@ import './index.less';
 
 const GioHang: React.FC = () => {
     // ── State toàn cục từ model ───────────────────────────────────────────────
-    const { cart, cartOpen, setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
+    const { cart, cartOpen, setCartOpen, clearCart } = useModel('Khách Hàng.Thực đơn.index');
+    const { addOrder } = useModel('Khách Hàng.Orders');
+    const { setPage } = useModel('Khách Hàng.global');
 
     // ── State cục bộ của giỏ hàng ─────────────────────────────────────────────
     const [note, setNote] = useState('');
@@ -24,11 +26,45 @@ const GioHang: React.FC = () => {
     // ── Xác nhận đặt món ──────────────────────────────────────────────────────
     const handleConfirm = () => {
         setIsLoading(true);
-        // TODO: gọi API đặt món thực tế
+        
         setTimeout(() => {
+            const SERVICE_FEE_RATE = 0.05;
+            const serviceFee = Math.round(subtotal * SERVICE_FEE_RATE);
+            const discount = (() => {
+                if (!selectedVoucher) return 0;
+                if (selectedVoucher.minOrder && subtotal < selectedVoucher.minOrder) return 0;
+                return selectedVoucher.discount;
+            })();
+            const total = Math.max(0, subtotal + serviceFee - discount);
+
+            const newOrder = {
+                id: `BU-${Math.floor(Math.random() * 9000) + 1000}`,
+                user: 'u1',
+                userName: 'Khách Hàng',
+                dept: 'Guest',
+                items: cart.map((it: any) => ({
+                    id: it.id,
+                    name: it.name,
+                    qty: it.qty,
+                    price: it.price
+                })),
+                total: total,
+                status: 'pending',
+                payment: payment,
+                created: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
+                pickup: '15 phút nữa',
+                note: note
+            };
+
+            addOrder(newOrder);
+            clearCart();
+            setNote('');
+            setSelectedVoucher(undefined);
+            
             setIsLoading(false);
             setCartOpen(false);
-        }, 1500);
+            setPage('history');
+        }, 1000);
     };
 
     return (
