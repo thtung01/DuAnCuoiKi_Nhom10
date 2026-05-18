@@ -13,6 +13,8 @@ const ThongBao: React.FC = () => {
         markAsRead, 
         markAllAsRead 
     } = useModel('Khách Hàng.Notifications');
+    
+    const { theme } = useModel('Khách Hàng.global');
 
     return (
         <Drawer
@@ -20,11 +22,10 @@ const ThongBao: React.FC = () => {
             closable={false}
             onClose={() => setIsNotificationOpen(false)}
             visible={isNotificationOpen}
-            className="notification-drawer"
+            className={`notification-drawer`}
             width={450}
             bodyStyle={{ padding: 0 }}
-            getContainer={false}
-            style={{ position: 'absolute' }}
+            getContainer={() => document.querySelector('.main-page-container') as HTMLElement || document.body}
         >
             <div className="custom-drawer-header">
                 <div className="title-left">
