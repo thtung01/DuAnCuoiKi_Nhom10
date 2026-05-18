@@ -15,6 +15,11 @@ export default [
     layout: false,
   },
   {
+    path: '/lien-he',
+    component: './Trang Chủ/Component/Liên hệ',
+    layout: false,
+  },
+  {
     path: '/dang-nhap',
     component: './Khách Hàng/đăng nhập',
     layout: false,
