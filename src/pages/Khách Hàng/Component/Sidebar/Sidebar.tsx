@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import './Sidebar.less';
 import { NAV_EMPLOYEE, defaultUser } from '@/services/Khách hàng/Sidebar';
-import { useModel } from 'umi';
+import { useModel, history } from 'umi';
 
 const Sidebar: React.FC = () => {
   const { page, setPage } = useModel('Khách Hàng.global');
@@ -77,7 +77,7 @@ const Sidebar: React.FC = () => {
           <span className="name">{user.name}</span>
           <span className="role">{user.dept}</span>
         </div>
-        <button className="icon-btn logout-btn">
+        <button className="icon-btn logout-btn" onClick={() => history.push('/')}>
           <LogoutOutlined style={{ fontSize: '16px' }} />
         </button>
       </div>
