@@ -22,7 +22,7 @@ const Topbar: React.FC = () => {
 
     return (
         <header className="topbar" style={{ position: 'relative' }}>
-            <button 
+            <button
                 className="mobile-menu-toggle"
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                 title="Mở menu"
@@ -39,10 +39,6 @@ const Topbar: React.FC = () => {
                 ))}
             </div>
 
-            <div className="search">
-                <SearchOutlined style={{ fontSize: '14px', color: 'var(--ink-3)' }} />
-                <input placeholder="Tìm món, đơn, người dùng…" />
-            </div>
 
             <div className="topbar-actions">
                 <button className="icon-btn" onClick={toggleTheme} title={theme === ThemeType.DARK ? 'Chế độ sáng' : 'Chế độ tối'}>
