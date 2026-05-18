@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import { DishCardProps } from '@/services/Khách hàng/Thực đơn/component/themonan';
 
-const DishCard: React.FC<DishCardProps> = ({ dish, qty, onAdd, onInc, onDec, onClick }) => (
+const DishCard: React.FC<DishCardProps> = ({ dish, qty, onAdd, onInc, onDec, onClick, isFuture }) => (
     <div className="dish-card" onClick={onClick} style={{ cursor: 'pointer' }}>
         <div className="dish-image">
             <div className="placeholder">
@@ -32,7 +32,9 @@ const DishCard: React.FC<DishCardProps> = ({ dish, qty, onAdd, onInc, onDec, onC
                 <div className="dish-price">
                     {dish.price.toLocaleString()} <span className="currency">đ</span>
                 </div>
-                {qty === 0 ? (
+                {isFuture ? (
+                    <span className="future-tag" onClick={(e) => e.stopPropagation()}>Chưa mở bán</span>
+                ) : qty === 0 ? (
                     <button className="dish-add" onClick={(e) => { e.stopPropagation(); onAdd(); }}>
                         <PlusOutlined />
                     </button>

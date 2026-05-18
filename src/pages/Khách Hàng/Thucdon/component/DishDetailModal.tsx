@@ -20,6 +20,7 @@ interface Props {
     onAdd: () => void;
     onInc: () => void;
     onDec: () => void;
+    isFuture?: boolean;
 }
 
 const renderStars = (count: number) =>
@@ -27,7 +28,7 @@ const renderStars = (count: number) =>
         <StarFilled key={s} style={{ color: s <= count ? '#f59e0b' : '#e5e7eb', fontSize: 13 }} />
     ));
 
-const DishDetailModal: React.FC<Props> = ({ dish, qty, onClose, onAdd, onInc, onDec }) => {
+const DishDetailModal: React.FC<Props> = ({ dish, qty, onClose, onAdd, onInc, onDec, isFuture }) => {
     const reviews = SEED_REVIEWS.filter((r) => r.dishId === dish.id);
 
     const handleBackdrop = (e: React.MouseEvent) => {
@@ -121,7 +122,11 @@ const DishDetailModal: React.FC<Props> = ({ dish, qty, onClose, onAdd, onInc, on
                         <span className="ddm-currency">đ</span>
                     </div>
 
-                    {qty === 0 ? (
+                    {isFuture ? (
+                        <button className="ddm-btn-add disabled" disabled style={{ background: '#f5f5f5', color: '#999', cursor: 'not-allowed', border: '1px solid #e9ecef', boxShadow: 'none' }}>
+                            Chưa mở bán
+                        </button>
+                    ) : qty === 0 ? (
                         <button className="ddm-btn-add" onClick={onAdd}>
                             <ShoppingCartOutlined />
                             Thêm vào giỏ

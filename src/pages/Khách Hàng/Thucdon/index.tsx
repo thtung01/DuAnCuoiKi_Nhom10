@@ -20,6 +20,8 @@ const EmployeeMenu: React.FC<EmployeeMenuProps> = ({ onOpenCart, ordersToday }) 
     const [day, setDay] = useState(todayTabIndex);
     const [selectedDish, setSelectedDish] = useState<any>(null);
 
+    const isFutureDay = day > todayTabIndex;
+
     const cartQty = (id: string) => {
         const item = cart.find((c: any) => c.id === id);
         return item ? item.qty : 0;
@@ -47,6 +49,7 @@ const EmployeeMenu: React.FC<EmployeeMenuProps> = ({ onOpenCart, ordersToday }) 
                         onInc={() => incCart(d.id)}
                         onDec={() => decCart(d.id)}
                         onClick={() => setSelectedDish(d)}
+                        isFuture={isFutureDay}
                     />
                 ))}
             </div>
@@ -60,6 +63,7 @@ const EmployeeMenu: React.FC<EmployeeMenuProps> = ({ onOpenCart, ordersToday }) 
                     onAdd={() => { addToCart(selectedDish); }}
                     onInc={() => incCart(selectedDish.id)}
                     onDec={() => decCart(selectedDish.id)}
+                    isFuture={isFutureDay}
                 />
             )}
         </div>

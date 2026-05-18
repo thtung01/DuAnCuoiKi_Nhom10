@@ -8,4 +8,5 @@ export interface DishCardProps {
     onInc: () => void;
     onDec: () => void;
     onClick?: () => void;
+    isFuture?: boolean;
 }
