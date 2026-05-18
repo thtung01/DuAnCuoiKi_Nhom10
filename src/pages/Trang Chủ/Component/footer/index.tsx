@@ -18,8 +18,8 @@ const AppFooter: React.FC = () => {
         <div className="footer-column links-column">
           <h4 className="footer-heading">Liên kết</h4>
           <ul className="footer-links">
-            <li><a href="#">Chính sách bảo mật</a></li>
-            <li><a href="#">Điều khoản dịch vụ</a></li>
+            <li><a href="/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
+            <li><a href="/dieu-khoan-dich-vu">Điều khoản dịch vụ</a></li>
             <li><a href="#">Liên hệ</a></li>
             <li><a href="#">Tuyển dụng</a></li>
           </ul>
