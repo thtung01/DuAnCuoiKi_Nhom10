@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
+import { history } from 'umi';
 import './banner.less';
 import bannerImg from '@/assets/trangchu/banner.png';
 
@@ -15,7 +16,11 @@ const Banner: React.FC = () => {
                         Trải nghiệm ẩm thực tinh tế, kết hợp hoàn hảo giữa hương vị truyền thống và phong cách hiện đại trong không gian sang trọng.
                     </p>
                 </div>
-                <Button type="primary" className="btn-order-now">
+                <Button 
+                    type="primary" 
+                    className="btn-order-now"
+                    onClick={() => history.push('/dang-nhap')}
+                >
                     Đặt món ngay
                 </Button>
             </div>
