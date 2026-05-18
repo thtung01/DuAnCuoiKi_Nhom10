@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { Dish } from '@/services/Khách hàng/Thực đơn/typing';
 import { SEED_MENU, MENU_CATEGORIES } from '@/services/Khách hàng/Thực đơn';
+import { SEED_REVIEWS, Review } from '@/services/Khách hàng/Thực đơn/reviews';
 
 // ─── Logic lời chào theo giờ trong ngày ───────────────────────────────────────────────
 const getGreeting = (): string => {
@@ -119,6 +120,18 @@ export default function useCartModel() {
     return counts;
   }, []);
 
+  // ─── Quản lý đánh giá/bình luận món ăn ───────────────────────────────────────────
+  const [reviews, setReviews] = useState<Review[]>(SEED_REVIEWS);
+
+  const addReview = useCallback((newReview: Omit<Review, 'id' | 'date'>) => {
+    const review: Review = {
+      ...newReview,
+      id: `r_${Date.now()}`,
+      date: new Date().toLocaleDateString('vi-VN'),
+    };
+    setReviews(prev => [review, ...prev]);
+  }, []);
+
   return {
     // lời chào và giờ hiện tại
     greeting,
@@ -144,5 +157,8 @@ export default function useCartModel() {
     // giao diện
     cartOpen,
     setCartOpen,
+    // đánh giá
+    reviews,
+    addReview,
   };
 }

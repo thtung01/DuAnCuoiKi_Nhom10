@@ -10,7 +10,7 @@ import {
     FireOutlined,
 } from '@ant-design/icons';
 import { Dish } from '@/services/Khách hàng/Thực đơn/typing';
-import { SEED_REVIEWS } from '@/services/Khách hàng/Thực đơn/reviews';
+import { useModel } from 'umi';
 import './DishDetailModal.less';
 
 interface Props {
@@ -29,7 +29,8 @@ const renderStars = (count: number) =>
     ));
 
 const DishDetailModal: React.FC<Props> = ({ dish, qty, onClose, onAdd, onInc, onDec, isFuture }) => {
-    const reviews = SEED_REVIEWS.filter((r) => r.dishId === dish.id);
+    const { reviews: globalReviews } = useModel('Khách Hàng.Thực đơn.index');
+    const reviews = globalReviews.filter((r) => r.dishId === dish.id);
 
     const handleBackdrop = (e: React.MouseEvent) => {
         if (e.target === e.currentTarget) onClose();

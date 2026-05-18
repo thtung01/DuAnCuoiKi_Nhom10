@@ -5,6 +5,8 @@ import {
     CameraFilled
 } from '@ant-design/icons';
 import { SEED_MENU } from '@/services/Khách hàng/Thực đơn';
+import { useModel } from 'umi';
+import { message } from 'antd';
 import './index.less';
 
 interface RatingPageProps {
@@ -13,6 +15,8 @@ interface RatingPageProps {
 }
 
 const RatingPage: React.FC<RatingPageProps> = ({ order, onClose }) => {
+    const { currentUser } = useModel('Khách Hàng.user');
+    const { addReview } = useModel('Khách Hàng.Thực đơn.index');
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [images, setImages] = useState<string[]>([]);
@@ -41,8 +45,21 @@ const RatingPage: React.FC<RatingPageProps> = ({ order, onClose }) => {
 
     const handleSubmit = () => {
         if (rating === 0) return;
-        console.log({ rating, comment, orderId: order?.id });
-        alert("Cảm ơn bạn đã đánh giá!");
+        
+        // Thêm đánh giá động cho từng món ăn có trong đơn hàng
+        if (order?.items) {
+            order.items.forEach((item: any) => {
+                addReview({
+                    dishId: item.id,
+                    author: currentUser?.name || 'Khách hàng',
+                    avatar: '😋', // Emoji ăn ngon siêu dễ thương làm avatar đại diện
+                    rating: rating,
+                    comment: comment.trim() || 'Món ăn ngon, đóng gói rất cẩn thận và sạch sẽ!',
+                });
+            });
+        }
+        
+        message.success("Cảm ơn bạn đã gửi đánh giá món ăn!");
         onClose();
     };
 
