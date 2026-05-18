@@ -21,7 +21,7 @@ const AppFooter: React.FC = () => {
             <li><a href="/chinh-sach-bao-mat">Chính sách bảo mật</a></li>
             <li><a href="/dieu-khoan-dich-vu">Điều khoản dịch vụ</a></li>
             <li><a href="/lien-he">Liên hệ</a></li>
-            <li><a href="#">Tuyển dụng</a></li>
+
           </ul>
         </div>
 
