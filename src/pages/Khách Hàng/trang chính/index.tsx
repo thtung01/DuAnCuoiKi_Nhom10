@@ -5,6 +5,7 @@ import Topbar from '../Component/topbar';
 import EmployeeMenu from '../Thucdon';
 import HistoryPage from '../Đơn Hàng';
 import GioHang from '../Giỏ Hàng';
+import ThongBao from '../Thông Báo';
 import './index.less';
 
 const MainPage: React.FC = () => {
@@ -34,6 +35,9 @@ const MainPage: React.FC = () => {
 
       {/* Giỏ hàng — drawer trượt từ phải, tự quản lý qua cartOpen */}
       <GioHang />
+      
+      {/* Thông báo — drawer trượt từ phải */}
+      <ThongBao />
     </div>
   );
 };

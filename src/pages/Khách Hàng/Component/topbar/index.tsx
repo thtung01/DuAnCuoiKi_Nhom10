@@ -15,6 +15,7 @@ const Topbar: React.FC = () => {
     const { theme, toggleTheme, breadcrumbs } = useModel('Khách Hàng.global');
     const { cart, setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
     const { role } = useModel('Khách Hàng.user');
+    const { unreadCount, setIsNotificationOpen } = useModel('Khách Hàng.Notifications');
 
     const cartCount = role === 'employee' ? cart.length : undefined;
 
@@ -39,9 +40,9 @@ const Topbar: React.FC = () => {
                     {theme === ThemeType.DARK ? <BulbFilled style={{ fontSize: '16px' }} /> : <BulbOutlined style={{ fontSize: '16px' }} />}
                 </button>
 
-                <button className="icon-btn">
+                <button className="icon-btn" onClick={() => setIsNotificationOpen(true)}>
                     <BellOutlined style={{ fontSize: '16px' }} />
-                    <span className="dot" />
+                    {unreadCount > 0 && <span className="dot" />}
                 </button>
 
                 {cartCount !== undefined && (

@@ -13,6 +13,7 @@ const Sidebar: React.FC = () => {
   const { page, setPage } = useModel('Khách Hàng.global');
   const { role, setRole, currentUser } = useModel('Khách Hàng.user');
   const { cart, setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
+  const { unreadCount, setIsNotificationOpen } = useModel('Khách Hàng.Notifications');
 
   const user = currentUser || defaultUser;
 
@@ -61,8 +62,9 @@ const Sidebar: React.FC = () => {
 
       <nav className="nav-section">
         <div className="nav-label">KHÁC</div>
-        <button className="nav-item">
+        <button className="nav-item" onClick={() => setIsNotificationOpen(true)}>
           <BellOutlined style={{ fontSize: '18px' }} /> Thông báo
+          {unreadCount > 0 && <span className="badge notification-badge">{unreadCount}</span>}
         </button>
         <button className="nav-item">
           <SettingOutlined style={{ fontSize: '18px' }} /> Cài đặt

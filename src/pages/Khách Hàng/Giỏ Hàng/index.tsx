@@ -13,6 +13,7 @@ const GioHang: React.FC = () => {
     const { cart, cartOpen, setCartOpen, clearCart } = useModel('Khách Hàng.Thực đơn.index');
     const { addOrder } = useModel('Khách Hàng.Orders');
     const { setPage } = useModel('Khách Hàng.global');
+    const { addNotification } = useModel('Khách Hàng.Notifications');
 
     // ── State cục bộ của giỏ hàng ─────────────────────────────────────────────
     const [note, setNote] = useState('');
@@ -57,6 +58,17 @@ const GioHang: React.FC = () => {
             };
 
             addOrder(newOrder);
+
+            // Thêm thông báo
+            addNotification({
+                id: `n-${Date.now()}`,
+                title: 'Đơn hàng đã được đặt thành công',
+                message: `Đơn hàng ${newOrder.id} của bạn đã được xác nhận và bếp đang bắt đầu chuẩn bị.`,
+                time: new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                isRead: false,
+                image: 'https://cdn-icons-png.flaticon.com/512/1046/1046784.png'
+            });
+
             clearCart();
             setNote('');
             setSelectedVoucher(undefined);
