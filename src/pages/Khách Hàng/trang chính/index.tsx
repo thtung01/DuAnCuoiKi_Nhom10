@@ -10,8 +10,11 @@ import TaiKhoan from '../Tài khoản';
 import './index.less';
 
 const MainPage: React.FC = () => {
-  const { page, theme } = useModel('Khách Hàng.global');
-  const { setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
+  const { page, theme, isSidebarOpen } = useModel('Khách Hàng.global');
+  const { cartOpen, setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
+  const { isNotificationOpen } = useModel('Khách Hàng.Notifications');
+
+  const isLockScroll = isNotificationOpen || cartOpen || isSidebarOpen;
 
   const renderContent = () => {
     switch (page) {
@@ -29,7 +32,7 @@ const MainPage: React.FC = () => {
   return (
     <div className={`main-page-container theme-${theme}`}>
       <Sidebar />
-      <main className="content-area">
+      <main className={`content-area ${isLockScroll ? 'scroll-locked' : ''}`}>
         <Topbar />
         <section className="content-body">
           {renderContent()}

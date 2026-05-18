@@ -1,6 +1,7 @@
 .main-page-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   position: relative;
   background-color: var(--bg-main, #f0f2f5);
   color: var(--ink, #333);
@@ -107,6 +108,11 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    
+    &.scroll-locked {
+      overflow-y: hidden !important; /* Khóa cuộn trang nền hoàn toàn */
+    }
+
     .content-body {
       padding: 32px;
       display: flex;
