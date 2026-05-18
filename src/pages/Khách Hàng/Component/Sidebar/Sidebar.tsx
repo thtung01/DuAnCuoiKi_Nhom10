@@ -66,13 +66,22 @@ const Sidebar: React.FC = () => {
           <BellOutlined style={{ fontSize: '18px' }} /> Thông báo
           {unreadCount > 0 && <span className="badge notification-badge">{unreadCount}</span>}
         </button>
-        <button className="nav-item">
+        <button 
+          className={`nav-item ${page === 'settings' ? 'active' : ''}`} 
+          onClick={() => setPage('settings')}
+        >
           <SettingOutlined style={{ fontSize: '18px' }} /> Cài đặt
         </button>
       </nav>
 
       <div className="user-pill">
-        <div className="avatar">{user.avatar}</div>
+        <div className="avatar">
+          {user.avatar && user.avatar.length > 2 ? (
+            <img src={user.avatar} alt="Avatar" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+          ) : (
+            user.avatar || 'U'
+          )}
+        </div>
         <div className="meta">
           <span className="name">{user.name}</span>
           <span className="role">{user.dept}</span>

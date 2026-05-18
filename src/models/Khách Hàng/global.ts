@@ -6,6 +6,7 @@ const PAGE_TITLES: Record<string, string> = {
   history: 'Lịch sử đơn hàng',
   vouchers: 'Kho Voucher',
   profile: 'Thông tin cá nhân',
+  settings: 'Cài đặt tài khoản',
 };
 
 export default function useGlobalModel() {

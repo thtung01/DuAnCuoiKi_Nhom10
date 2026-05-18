@@ -6,6 +6,7 @@ import EmployeeMenu from '../Thucdon';
 import HistoryPage from '../Đơn Hàng';
 import GioHang from '../Giỏ Hàng';
 import ThongBao from '../Thông Báo';
+import TaiKhoan from '../Tài khoản';
 import './index.less';
 
 const MainPage: React.FC = () => {
@@ -18,6 +19,8 @@ const MainPage: React.FC = () => {
         return <EmployeeMenu onOpenCart={() => setCartOpen(true)} ordersToday={12} />;
       case 'history':
         return <HistoryPage />;
+      case 'settings':
+        return <TaiKhoan />;
       default:
         return null;
     }
