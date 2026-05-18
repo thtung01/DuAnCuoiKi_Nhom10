@@ -100,10 +100,19 @@ const CartOption: React.FC<CartOptionProps> = ({
                     <span>Voucher giảm giá</span>
                 </div>
                 <div
-                    className={`voucher-selector ${selectedVoucher ? 'has-value' : ''}`}
-                    onClick={() => setIsVoucherModalOpen(true)}
+                    className={`voucher-selector ${selectedVoucher ? 'has-value' : ''} ${cart.length === 0 ? 'disabled' : ''}`}
+                    onClick={() => {
+                        if (cart.length > 0) {
+                            setIsVoucherModalOpen(true);
+                        }
+                    }}
+                    style={cart.length === 0 ? { opacity: 0.6, cursor: 'not-allowed' } : {}}
                 >
-                    {selectedVoucher ? (
+                    {cart.length === 0 ? (
+                        <div className="placeholder">
+                            <span>Thêm món để chọn Voucher</span>
+                        </div>
+                    ) : selectedVoucher ? (
                         <div className="selected-info">
                             <CheckCircleFilled className="success-icon" />
                             <div className="text">

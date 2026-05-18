@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CloseOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { useModel } from 'umi';
 import DanhSachMon from './component/danhsachmon';
@@ -23,6 +23,15 @@ const GioHang: React.FC = () => {
 
     const cartQty = cart.reduce((s: number, i: any) => s + i.qty, 0);
     const subtotal = cart.reduce((s: number, i: any) => s + i.price * i.qty, 0);
+
+    // Tự động gỡ voucher nếu giỏ hàng trống hoặc không đủ điều kiện
+    useEffect(() => {
+        if (cart.length === 0 && selectedVoucher) {
+            setSelectedVoucher(undefined);
+        } else if (selectedVoucher && selectedVoucher.minOrder && subtotal < selectedVoucher.minOrder) {
+            setSelectedVoucher(undefined);
+        }
+    }, [cart.length, subtotal, selectedVoucher]);
 
     // ── Xác nhận đặt món ──────────────────────────────────────────────────────
     const handleConfirm = () => {
