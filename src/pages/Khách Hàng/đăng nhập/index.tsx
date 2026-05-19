@@ -184,7 +184,7 @@ export default function LoginPage() {
         {/* PHẦN PHẢI: ẢNH CĂN TIN */}
         <div className="right-panel">
           <img src={bgImage} alt="Ảnh căn tin" className="bg-image" />
-          
+
           <div className="overlay-gradient"></div>
           <div className="overlay-dark"></div>
 
@@ -231,10 +231,10 @@ export default function LoginPage() {
             </p>
 
             <div className="features">
-              <FeatureCardRight icon={<ShieldCheck size={34} />} title="Bảo mật" desc="An toàn tuyệt đối" />
-              <FeatureCardRight icon={<Zap size={34} />} title="Nhanh chóng" desc="Đăng nhập chỉ 1s" />
-              <FeatureCardRight icon={<Leaf size={34} />} title="Tiện lợi" desc="Mọi lúc, mọi nơi" />
-              <FeatureCardRight icon={<Headphones size={34} />} title="Hỗ trợ 24/7" desc="Luôn sẵn sàng" />
+              <FeatureCardRight icon={<ShieldCheck size={16} />} title="Bảo mật" desc="An toàn tuyệt đối" />
+              <FeatureCardRight icon={<Zap size={16} />} title="Nhanh chóng" desc="Đăng nhập chỉ 1s" />
+              <FeatureCardRight icon={<Leaf size={16} />} title="Tiện lợi" desc="Mọi lúc, mọi nơi" />
+              <FeatureCardRight icon={<Headphones size={16} />} title="Hỗ trợ 24/7" desc="Luôn sẵn sàng" />
             </div>
           </div>
         </div>

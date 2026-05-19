@@ -54,7 +54,7 @@ const Sidebar: React.FC = () => {
                 } else {
                   setPage(item.id);
                 }
-                setIsSidebarOpen(false); // Close sidebar on mobile item click
+                setIsSidebarOpen(false); 
               }}
             >
               <Icon style={{ fontSize: '18px' }} />
