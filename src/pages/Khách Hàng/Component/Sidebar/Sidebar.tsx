@@ -1,21 +1,86 @@
 import React from 'react';
 import {
-  UserOutlined,
-  BellOutlined,
-  SettingOutlined,
-  LogoutOutlined,
-} from '@ant-design/icons';
+  Bell,
+  ChevronDown,
+  ClipboardList,
+  Gift,
+  HelpCircle,
+  Home,
+  LogOut,
+  Settings,
+  ShoppingCart,
+  User,
+  Utensils,
+} from 'lucide-react';
 import './Sidebar.less';
-import { NAV_EMPLOYEE, defaultUser } from '@/services/Khách hàng/Sidebar';
+import { defaultUser } from '@/services/Khách hàng/Sidebar';
 import { useModel, history } from 'umi';
 
 const Sidebar: React.FC = () => {
   const { page, setPage, isSidebarOpen, setIsSidebarOpen } = useModel('Khách Hàng.global');
-  const { role, setRole, currentUser } = useModel('Khách Hàng.user');
+  const { currentUser } = useModel('Khách Hàng.user');
   const { cart, setCartOpen } = useModel('Khách Hàng.Thực đơn.index');
   const { unreadCount, setIsNotificationOpen } = useModel('Khách Hàng.Notifications');
 
   const user = currentUser || defaultUser;
+  const cartQty = cart.reduce((sum: number, item: any) => sum + item.qty, 0);
+
+  const closeSidebar = () => setIsSidebarOpen(false);
+
+  const orderItems = [
+    {
+      id: 'home',
+      label: 'Trang chủ',
+      icon: <Home size={17} />,
+      onClick: () => history.push('/'),
+    },
+    {
+      id: 'menu',
+      label: 'Thực đơn',
+      icon: <Utensils size={17} />,
+      active: page === 'menu',
+      onClick: () => setPage('menu'),
+    },
+    {
+      id: 'cart',
+      label: 'Giỏ hàng',
+      icon: <ShoppingCart size={17} />,
+      badge: cartQty > 0 ? cartQty : undefined,
+      badgeTone: 'green' as const,
+      onClick: () => setCartOpen(true),
+    },
+    {
+      id: 'history',
+      label: 'Đơn hàng',
+      icon: <ClipboardList size={17} />,
+      active: page === 'history',
+      onClick: () => setPage('history'),
+    },
+  ];
+
+  const otherItems = [
+    {
+      id: 'notifications',
+      label: 'Thông báo',
+      icon: <Bell size={17} />,
+      badge: unreadCount > 0 ? unreadCount : undefined,
+      badgeTone: 'red' as const,
+      onClick: () => setIsNotificationOpen(true),
+    },
+    {
+      id: 'settings',
+      label: 'Cài đặt',
+      icon: <Settings size={17} />,
+      active: page === 'settings',
+      onClick: () => setPage('settings'),
+    },
+    {
+      id: 'help',
+      label: 'Trợ giúp',
+      icon: <HelpCircle size={17} />,
+      onClick: () => history.push('/lien-he'),
+    },
+  ];
 
   return (
     <>
@@ -23,81 +88,138 @@ const Sidebar: React.FC = () => {
         <div className="sidebar-backdrop" onClick={() => setIsSidebarOpen(false)} />
       )}
       <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-      <div className="brand">
-        <img src="/logo.webp" alt="Logo" className="brand-logo" />
-        <div className="brand-text">
-          <div className="brand-name">Căng tin</div>
-          <div className="brand-sub">DOANH NGHIỆP</div>
+        <div className="sidebar-top">
+          <div className="brand">
+            <img src="/logo.webp" alt="Logo" className="brand-logo" />
+            <div className="brand-text">
+              <div className="brand-name">Căng tin</div>
+              <div className="brand-sub">Doanh nghiệp</div>
+            </div>
+          </div>
+
+          <button className="role-card" onClick={closeSidebar}>
+            <div className="role-left">
+              <div className="role-avatar">
+                <User size={19} />
+              </div>
+              <div>
+                <p>Người dùng</p>
+                <span>Nhân viên</span>
+              </div>
+            </div>
+            <ChevronDown size={17} />
+          </button>
+
+          <SidebarSection >
+            {orderItems.map((item) => (
+              <SidebarItem
+                key={item.id}
+                active={item.active}
+                icon={item.icon}
+                label={item.label}
+                badge={item.badge}
+                badgeTone={item.badgeTone}
+                onClick={() => {
+                  item.onClick();
+                  closeSidebar();
+                }}
+              />
+            ))}
+          </SidebarSection>
+
+          <div className="sidebar-divider" />
+
+          <SidebarSection title="Khác">
+            {otherItems.map((item) => (
+              <SidebarItem
+                key={item.id}
+                active={item.active}
+                icon={item.icon}
+                label={item.label}
+                badge={item.badge}
+                badgeTone={item.badgeTone}
+                onClick={() => {
+                  item.onClick();
+                  closeSidebar();
+                }}
+              />
+            ))}
+          </SidebarSection>
         </div>
-      </div>
 
-      <div className="role-switcher">
-        <button
-          className={role === 'employee' ? 'active' : ''}
-          onClick={() => setRole('employee')}
-        >
-          <UserOutlined style={{ fontSize: '13px' }} /> Người dùng
-        </button>
-      </div>
+        <div className="sidebar-bottom">
+          <div className="reward-card">
+            <div className="reward-icon">
+              <Gift size={28} />
+            </div>
+            <p>Điểm thưởng</p>
+            <h3>1.250 điểm</h3>
+            <span>Bạn còn <strong>250 điểm</strong> sẽ lên hạng Bạc</span>
+            <div className="reward-progress">
+              <div />
+            </div>
+          </div>
 
-      <nav className="nav-section">
-        <div className="nav-label">ĐẶT MÓN</div>
-        {NAV_EMPLOYEE.map(item => {
-          const Icon = item.icon;
-          return (
-            <button
-              key={item.id}
-              className={`nav-item ${page === item.id ? 'active' : ''}`}
-              onClick={() => {
-                if (item.id === 'cart') {
-                  setCartOpen(true);
-                } else {
-                  setPage(item.id);
-                }
-                setIsSidebarOpen(false); 
-              }}
-            >
-              <Icon style={{ fontSize: '18px' }} />
-              {item.label}
-              {item.id === 'cart' && cart.length > 0 && <span className="badge">{cart.length}</span>}
+          <div className="user-pill">
+            <div className="avatar">
+              {user.avatar && user.avatar.length > 2 ? (
+                <img src={user.avatar} alt="Avatar" />
+              ) : (
+                user.avatar || 'U'
+              )}
+            </div>
+            <div className="meta">
+              <span className="name">{user.name}</span>
+              <span className="role">{user.dept}</span>
+            </div>
+            <button className="logout-btn" onClick={() => history.push('/')} aria-label="Đăng xuất">
+              <LogOut size={17} />
             </button>
-          );
-        })}
-      </nav>
-
-      <nav className="nav-section">
-        <div className="nav-label">KHÁC</div>
-        <button className="nav-item" onClick={() => { setIsNotificationOpen(true); setIsSidebarOpen(false); }}>
-          <BellOutlined style={{ fontSize: '18px' }} /> Thông báo
-          {unreadCount > 0 && <span className="badge notification-badge">{unreadCount}</span>}
-        </button>
-        <button 
-          className={`nav-item ${page === 'settings' ? 'active' : ''}`} 
-          onClick={() => { setPage('settings'); setIsSidebarOpen(false); }}
-        >
-          <SettingOutlined style={{ fontSize: '18px' }} /> Cài đặt
-        </button>
-      </nav>
-
-      <div className="user-pill">
-        <div className="avatar">
-          {user.avatar && user.avatar.length > 2 ? (
-            <img src={user.avatar} alt="Avatar" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
-          ) : (
-            user.avatar || 'U'
-          )}
+          </div>
         </div>
-        <div className="meta">
-          <span className="name">{user.name}</span>
-          <span className="role">{user.dept}</span>
-        </div>
-        <button className="icon-btn logout-btn" onClick={() => history.push('/')}>
-          <LogoutOutlined style={{ fontSize: '16px' }} />
-        </button>
-      </div>
       </aside>
     </>
   );
 };
+
+interface SidebarSectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const SidebarSection: React.FC<SidebarSectionProps> = ({ title, children }) => (
+  <nav className="nav-section">
+    <div className="nav-label">{title}</div>
+    <div className="nav-list">{children}</div>
+  </nav>
+);
+
+interface SidebarItemProps {
+  active?: boolean;
+  icon: React.ReactNode;
+  label: string;
+  badge?: number;
+  badgeTone?: 'green' | 'red';
+  onClick: () => void;
+}
+
+const SidebarItem: React.FC<SidebarItemProps> = ({
+  active,
+  icon,
+  label,
+  badge,
+  badgeTone = 'green',
+  onClick,
+}) => (
+  <button className={`nav-item ${active ? 'active' : ''}`} onClick={onClick}>
+    <span className="nav-item-main">
+      <span className="nav-icon">{icon}</span>
+      <span className="nav-text">{label}</span>
+    </span>
+    {badge !== undefined && (
+      <span className={`badge badge-${badgeTone}`}>{badge}</span>
+    )}
+  </button>
+);
 
 export default Sidebar;

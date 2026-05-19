@@ -217,17 +217,28 @@ export default function LoginPage() {
 
           <div className="content">
             <div className="welcome-wrapper">
-              <p className="welcome-text">Xin chào,</p>
+              <p className="welcome-text">
+                {isSignUp ? "Khởi đầu," : "Xin chào,"}
+              </p>
               <h2 className="welcome-title">
-                Bạn!
+                {isSignUp ? "Mới!" : "Bạn!"}
                 <span className="underline-1"></span>
                 <span className="underline-2"></span>
               </h2>
             </div>
 
             <p className="welcome-desc">
-              Nhập thông tin cá nhân của bạn <br />
-              và bắt đầu hành trình với chúng tôi
+              {isSignUp ? (
+                <>
+                  Hãy tạo tài khoản ngay <br />
+                  để nhận nhiều ưu đãi hấp dẫn
+                </>
+              ) : (
+                <>
+                  Nhập thông tin cá nhân của bạn <br />
+                  và bắt đầu hành trình với chúng tôi
+                </>
+              )}
             </p>
 
             <div className="features">
